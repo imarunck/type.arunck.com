@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fonts — Arun CK — Type Design</title>
+  <meta name="description" content="A curated list of fonts by Arun CK — GTN and more." />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- UI font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Page + shared styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Load local webfonts for specimens (adjust names if needed) -->
+  <style>
+    @font-face{
+      font-family: "GTN";
+      src: url("/assets/webfonts/GTN-Regular.woff2") format("woff2-variations"),
+           url("/assets/webfonts/GTN-Regular.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "anchu";
+      src: url("assets/webfonts/Anchu-Kannada-Regular.woff") format("woff"),
+           url("/assets/webfonts/Anchu-Kannada-Regular.woff") format("woff");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+</head>
+<body class="page-fonts">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header: same structure as main page -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <a href="/" class="logo" aria-label="Type by Arun CK">type<span class="dot">.arunck.com</span></a>
+        <p class="tagline">Type Designer — Kannada and Latin Scripts</p>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+        <ul id="nav-list" class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/fonts/" aria-current="page">Fonts</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+    <hr class="divider">
+  </header>
+
+  <main id="main" class="wrap main-content" role="main">
+    <section class="hero">
+      <h1 class="hero-title">Type by <span class="ack">Arun CK</span></h1>
+    <!--<p class="hero-sub">Catalog of released families and upcoming releases. Click any item to view specimen, technical notes and downloads.</p>-->
+    </section>
+
+    <hr class="divider">
+
+    <!-- Released fonts (no section title as requested) -->
+    <section class="fonts-list" aria-label="Released fonts">
+    <!-- Font item: GTN Kannada (released) -->
+      <a href="/fonts/GTN/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name GTN">ಜಿ ಟಿ ನಾರಾಯಣ್ ರಾವ್ ಫಾಂಟ್</span>
+          </span>
+          <p class="font-desc">
+            A monospace companion for editorial and code-like layouts — compact, readable glyphs for Kannada + Latin.
+          </p>
+          <div class="font-meta">
+            <span class="badge">Kannada</span>
+            <span class="badge">Mono</span>
+            <span class="badge">OFL</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+            <span class="btn ghost">View</span>
+        </div>
+      </article>
+      </a>
+
+      <!-- Font item: Anchu Kannada (released) -->
+      <a href="/fonts/anchu/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name anchu">ಅಂಚು ಕನ್ನಡ ಫಾಂಟ್</span>
+          </span>
+          <p class="font-desc">
+            A monospace companion for editorial and code-like layouts — compact, readable glyphs for Kannada + Latin.
+          </p>
+          <div class="font-meta">
+            <span class="badge">Kannada</span>
+            <span class="badge">Mono</span>
+            <span class="badge">OFL</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+            <span class="btn ghost">View</span>
+        </div>
+      </article>
+      </a>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- Upcoming section
+    <section class="upcoming">
+      <h2>Upcoming</h2>
+
+      <article class="font-item upcoming-item" data-href="/fonts/family-b/">
+        <div class="font-left">
+          <button class="font-name" data-target="/fonts/family-b/" aria-label="Open Family B page">
+            <span class="specimen-name upcoming-sample">Family B (upcoming)</span>
+          </button>
+          <p class="font-desc clickable" data-target="/fonts/family-b/">
+            Display family for headings and signage — currently in testing (release planned).
+          </p>
+          <div class="font-meta">
+            <span class="badge">Display</span>
+            <span class="badge muted">Planned</span>
+          </div>
+        </div>
+        <div class="font-right">
+          <a class="btn" href="/fonts/family-b/">View</a>
+          <a class="btn ghost" href="/fonts/family-b/">Download</a>
+        </div>
+      </article>
+    </section>   -->
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-left">
+        <p>© <span id="year"></span> Arun CK — All fonts distributed under Open Font License unless stated otherwise.</p>
+      </div>
+      <div class="footer-right">
+        <nav class="social">
+          <a href="https://github.com/imarunck" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://twitter.com/imarunck" target="_blank" rel="noopener">Twitter</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- scripts: shared + page -->
+  <script src="/js/main.js" defer></script>
+  <script src="/js/fonts.js" defer></script>
+</body>
+</html>

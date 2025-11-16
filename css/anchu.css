@@ -1,0 +1,65 @@
+/* gtn.css - GTN single font page styles (depends on variables in /css/main.css) */
+
+:root{
+  --specimen-max-width: 980px;
+}
+
+/* Hero tweaks */
+.hero{ padding:1.5rem 0 0.75rem; }
+.hero-title{ color:var(--brand); font-size:2rem; }
+.hero-actions{ margin-top:.75rem; display:flex; gap:.6rem; }
+
+/* Big name rendered in GTN */
+.big-name{ margin-top:1rem; display:flex; flex-direction:column; gap:.6rem; align-items:flex-start; }
+.name-display{
+  font-family: "anchu", ui-monospace, Menlo, monospace;
+  font-variation-settings: '"wght" 400';
+  font-size:8.5rem; /* large display */
+  line-height:0.9;
+  letter-spacing: -0.02em;
+  color:var(--brand);
+  margin:0;
+}
+.two-line-desc{ margin:0; color:var(--muted); font-size:1rem; }
+
+/* Testing area */
+.type-testing{ margin-top:1rem; }
+.controls{ display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:.5rem; }
+.controls label{ font-size:.95rem; color:var(--text); }
+.controls select, .controls input[type="range"]{ font-family:var(--ui); }
+
+/* Editable specimen area */
+.testing-area{ margin-top:.5rem; display:flex; flex-direction:column; gap:.5rem; }
+.specimen-editable{
+  width:100%;
+  max-width:var(--specimen-max-width);
+  min-height:200px;
+  padding:1rem;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  background: #f0e2e3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  outline: none;
+  white-space:pre-wrap;
+  overflow:auto;
+  font-family: "anchu", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-size:48px;
+  line-height:1.45;
+  /* default variable axis */
+  font-variation-settings: '"wght" 400';
+}
+
+/* make sure contenteditable shows caret clearly */
+.specimen-editable:focus{ box-shadow: 0 0 0 4px rgba(175,28,46,0.06); border-color: rgba(175,28,46,0.12); }
+
+/* small helper note */
+.specimen-help{ font-size:.92rem; }
+
+/* Usage list */
+.tech ul{ margin:0.5rem 0 1.2rem 1.2rem; color:var(--muted) }
+
+/* Responsive */
+@media (max-width:720px){
+  .name-display{ font-size:3rem; }
+  .specimen-editable{ font-size:20px; }
+}
