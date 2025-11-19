@@ -11,13 +11,19 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Local webfonts (example GTN, optional) -->
-  <style>
-    /* If you export GTN variable/static fonts into assets/webfonts, the @font-face below will use them.
-       Adjust file names if different. Keep font-display:swap for performance. */
+ <style>
     @font-face{
       font-family: "GTN";
-      src: url("/assets/webfonts/GTN-Variable.woff2") format("woff2-variations"),
+      src: url("/assets/webfonts/GTN-Regular.woff2") format("woff2-variations"),
            url("/assets/webfonts/GTN-Regular.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "anchu";
+      src: url("assets/webfonts/Anchu-Kannada-Regular.woff") format("woff"),
+           url("/assets/webfonts/Anchu-Kannada-Regular.woff") format("woff");
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
@@ -25,6 +31,8 @@
   </style>
 
   <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+
 </head>
 <body class="page-root">
 
@@ -75,13 +83,61 @@
       </p>
     </section> -->
 
-    <hr class="divider">
 
-    <!-- Featured fonts -->
+     <section class="fonts-list" aria-label="Released fonts">
+    <!-- Font item: GTN Kannada (released) -->
+      <a href="/fonts/GTN/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name GTN">ಜಿ ಟಿ ನಾರಾಯಣ್ ರಾವ್ ಫಾಂಟ್</span>
+          </span>
+          <p class="font-desc">
+            A monospace companion for editorial and code-like layouts — compact, readable glyphs for Kannada + Latin.
+          </p>
+          <div class="font-meta">
+            <span class="badge">Kannada</span>
+            <span class="badge">Mono</span>
+            <span class="badge">OFL</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+            <span class="btn ghost">View</span>
+        </div>
+      </article>
+      </a>
+
+      <!-- Font item: Anchu Kannada (released) -->
+      <a href="/fonts/anchu/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name anchu">ಅಂಚು ಕನ್ನಡ ಫಾಂಟ್</span>
+          </span>
+          <p class="font-desc">
+            A monospace companion for editorial and code-like layouts — compact, readable glyphs for Kannada + Latin.
+          </p>
+          <div class="font-meta">
+            <span class="badge">Kannada</span>
+            <span class="badge">Mono</span>
+            <span class="badge">OFL</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+            <span class="btn ghost">View</span>
+        </div>
+      </article>
+      </a>
+
+    </section>
+
+
+    <!-- Featured fonts 
     <section class="featured">
       <h2>Featured</h2>
       <div class="grid three">
-        <!-- Card: GTN -->
         <article class="card">
           <div class="card-hero">
             <img src="/assets/images/fonts/gtn-specimen.png" alt="GTN specimen showing Kannada and Latin samples">
@@ -95,13 +151,11 @@
               <span class="badge">Script</span>
             </div>
             <div class="card-actions">
-              <!-- a class="btn" href="/fonts/GTN/">View</a -->
               <a class="btn ghost" href="/fonts/GTN/">View</a>
             </div>
           </div>
         </article>
 
-        <!-- Placeholder cards (duplicate/replace with your fonts) -->
         <article class="card">
           <div class="card-hero">
             <img src="/assets/images/fonts/anchu-specimen.png" alt="GTN specimen showing Kannada and Latin samples">
@@ -115,7 +169,6 @@
               <span class="badge">Kannada</span>
             </div>
             <div class="card-actions">
-              <!-- a class="btn" href="/fonts/GTN/">View</a -->
               <a class="btn ghost" href="/fonts/GTN/">View</a>
             </div>
           </div>
@@ -134,7 +187,6 @@
               <span class="badge">Kannada</span>
             </div>
             <div class="card-actions">
-               <!--<a class="btn" href="/fonts/GTN/">View</a>-->
               <a class="btn ghost" href="/">View</a>
             </div>
           </div>
@@ -142,7 +194,7 @@
 
         
       </div>
-    </section>
+    </section> -->
 
 
     <!--  <hr class="divider">
