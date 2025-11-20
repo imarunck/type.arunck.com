@@ -1,6 +1,6 @@
 :root{
   --brand: #AF1C2E;
-  --bg: #f8f1f1;
+  --bg: #f7f4f4;
   --text: #111;
   --typebox: #ffffff;
   --muted: #6b6b6b;
@@ -8,7 +8,13 @@
   --divider: rgba(0,0,0,0.08);
   --radius: 8px;
   --gap: 1.25rem;
-  --mono:  ui-monospace, "Google Sans Code", SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    /* font weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+    /* fonts */
+  --mono: 'JetBrains Mono', ui-monospace, "Google Sans Code", SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
   --ui:  "Lexend", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
@@ -26,8 +32,52 @@ body{
   font-size:16px;
   -webkit-text-size-adjust:100%;
   --content-padding: 1.25rem;
-
+  font-weight: var(--weight-regular);
 }
+
+h1, h2, h3, h4 {
+  font-weight: var(--weight-semibold);
+}
+
+strong, b {
+  font-weight: var(--weight-semibold);
+}
+
+.nav, .menu, button {
+  font-weight: var(--weight-medium);
+}
+
+p, li, span {
+  font-weight: var(--weight-regular);
+}
+
+
+/* Global code styling */
+code, pre, pre code {
+  font-family: var(--mono) !important;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 400;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Optional: nicer code block background */
+pre {
+  background:var(--typebox);
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Optional: inline code style */
+code {
+  background:var(--typebox);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
 
 a:link,
 a:visited,
@@ -72,11 +122,11 @@ a:active {
   font-weight:700;
   color:var(--brand);
   text-decoration:none;
-  font-size:2.6rem;
+  font-size:2rem;
   letter-spacing:.05em;
 }
 .brand .dot{ color:var(--text); opacity:.85; margin-left:.12rem }
-.tagline{ margin:0; font-size:1.2rem; color:var(--muted) }
+.tagline{ margin:0; font-size:1rem; color:var(--muted) }
 
 /* Nav */
 .site-nav{ display:flex; align-items:center; gap:1rem; }
@@ -93,7 +143,7 @@ a:active {
 
 /* Hero */
 .hero{ padding:1.25rem 0 0 0; display:grid; align-items:center; gap:.75rem; }
-.hero-title{ margin:0; font-size:2rem; color:var(--brand); line-height:1.08; }
+.hero-title{ margin:0; font-size:2rem; font-weight: 600; color:var(--brand); line-height:1.08; }
 .hero-sub{ margin:.5rem 0 1rem; color:var(--muted) }
 .hero-ctas{ display:flex; gap:.75rem; flex-wrap:wrap; }
 
@@ -168,5 +218,13 @@ a:active {
   .brand .tagline{ display:none }
 }
 
+@media (max-width: 768px) {
+  html, body {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+
 /* small helpers */
-code{ font-family: var(--mono); background: #f8f8f8; padding:.1rem .25rem; border-radius:4px; font-size:.92em; }
+code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-size:.92em; }

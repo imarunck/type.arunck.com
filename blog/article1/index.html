@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Designing corner shapes for Kannada conjuncts — Arun CK</title>
+  <title>Glyph Naming in Kannada Type Design — Arun CK</title>
   <meta name="description" content="A process log on sketches, digital trials, and OpenType lookup choices used in GTN to solve stacked conjunct forms." />
   <link rel="icon" href="/favicon.ico" />
 
   <!-- Lexend & IBM Plex Sans (UI) -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 
   <!-- Shared + article styles -->
   <link rel="stylesheet" href="/css/main.css">
@@ -54,9 +56,9 @@
   <main id="article" class="wrap article-content" role="main">
     <!-- Hero Title -->
     <header class="article-hero">
-      <h1 class="article-title">Designing corner shapes for Kannada conjuncts</h1>
+      <h1 class="article-title">Glyph Naming in Kannada Type Design</h1>
       <div class="meta">
-        <time datetime="2025-10-09">October 9, 2025</time>
+        <time datetime="2025-11-20">November 20, 2025</time>
         <span class="meta-sep">•</span>
         <span class="author">By <a href="/about/">Arun C K</a></span>
         <div class="share">
@@ -68,91 +70,218 @@
 
       <!-- Feature image -->
       <figure class="feature-image">
-        <img src="/assets/images/blog/article1-720x405.jpg" alt="Sketches and glyph trials for Kannada conjuncts" width="720" height="405">
-        <figcaption>Sketches and trials: exploring corner forms for stacked conjuncts.</figcaption>
+        <img src="/assets/images/blog/article1.jpg" alt="An image showing kannada letter is equal to kn_k" width="720" height="405">
+        <figcaption>An image showing kannada letter is equal to kn_k</figcaption>
       </figure>
     </header>
 
     <!-- Article body -->
     <article class="prose" aria-label="Article body">
-      <p class="lead">
-        This is a short process log describing how I approached the corner and knot shapes for stacked conjuncts while designing <strong>GTN</strong>.
-        It covers research, sketches, digital trials and the OpenType strategies used to implement robust rendering across platforms.
-      </p>
-
-      <h2 id="problem">Problem: stacking and visual rhythm</h2>
-      <p>
-        Kannada conjuncts present a challenge when multiple consonants stack or follow with vowel signs. Corner geometry — where two strokes meet or bend — strongly
-        influences optical color and readability in text. My objective was to craft corner shapes that:
-      </p>
-      <ul>
-        <li>remain legible at small sizes (12–16px)</li>
-        <li>avoid visual collisions in tight metrics</li>
-        <li>render consistently across rasterizers (browser engines, HarfBuzz, native apps)</li>
-      </ul>
-
-      <h2 id="research">Research & sketches</h2>
-      <p>
-        I began by collecting printed samples and screenshots across UI contexts (web, mobile, e-books). Then I made pencil sketches focusing on:
-      </p>
-      <ol>
-        <li>the shoulder of the consonant where ligation occurs</li>
-        <li>how vowel signs attach without creating dense ink traps</li>
-        <li>negative space to preserve distinct counters</li>
-      </ol>
-
-      <figure class="inline-figure">
-        <img src="/assets/images/blog/sketches-900x360.jpg" alt="Paper sketches of conjunct shapes" width="900" height="360">
-        <figcaption>Paper sketches — exploring corner radius and junction shapes.</figcaption>
-      </figure>
-
-      <h2 id="digital-workflow">Digital workflow</h2>
-      <p>
-        In FontLab I translated the sketches into Bézier shapes. Key steps:
-      </p>
-      <ul>
-        <li>Start from a few base strokes and reuse them for similar corners to maintain consistency across glyphs.</li>
-        <li>Use boolean operations carefully; clean up nodes to avoid accidental overlaps that hint poorly.</li>
-        <li>Export test builds frequently to verify rendering in the browser and the desktop apps.</li>
-      </ul>
-
-      <h3>Reusable corner components</h3>
-      <p>
-        I created a small library of corner components (left shoulder, right shoulder, rounded knot). These were placed as masters and scaled or mirrored as needed.
-        Reusable components reduce visual drift between related conjunct forms and simplify fixing issues across the family.
-      </p>
-
-      <h2 id="features">OpenType & feature choices</h2>
-      <p>
-        Implementation choices focused on robust behavior rather than visual-only solutions:
-      </p>
-      <ul>
-        <li><code>ccmp</code> for composition/decomposition corrections.</li>
-        <li><code>locl</code> to enable Kannada-specific alternates in environments that need them.</li>
-        <li>When stacking required special shapes I used <code>rphf</code>/<code>akhn</code>/<code>blwf</code> style lookups and carefully ordered them to avoid unintended substitutions.</li>
-      </ul>
-
-      <h2 id="testing">Testing & results</h2>
-      <p>
-        Testing is iterative: after each change I generate variable and static builds and load them in:
-      </p>
-      <ul>
-        <li>Chrome, Firefox and WebKit-based browsers</li>
-        <li>Android text renderers and select e-readers</li>
-        <li>Desktop apps (Word, LibreOffice) for fallback behavior</li>
-      </ul>
-      <p>
-        The result in <strong>GTN</strong> is a set of corner shapes that hold up at small sizes and reduce perceived collisions inside dense lines. Using shared components improved fix velocity — a bug in a base corner only needed a single correction that cascaded to derived glyphs.
-      </p>
-
-      <h2 id="conclusion">Conclusion</h2>
-      <p>
-        Solving corner shapes is part drawing, part engineering. A consistent system of components plus careful OpenType lookup ordering made the shapes robust across platforms.
-        If you want to see the glyph set or test the font, visit the <a href="/fonts/GTN/">GTN page</a>.
-      </p>
+    
+        <h1><strong>1. What Is Glyph Naming?</strong></h1>
+        <p>In digital type design, every visible shape in a font whether it is a letter, numeral, punctuation mark, or ligature is stored as a&nbsp;<strong>glyph</strong>.<br>A <strong>glyph name</strong> is the unique identifier assigned to each of these shapes inside the font file.</p>
+        <p>For Latin fonts, names like <code>A</code>, <code>B</code>, <code>a</code>, or&nbsp;<code>aacute</code> are common.<br>For complex scripts such as&nbsp;<strong>Kannada</strong>, where letters can combine and reshape based on context, glyph names must go beyond single characters.<br>They describe both the <strong>base character</strong> and any attached components (vowel signs, viramas, or conjunct forms).</p>
+        <p>Glyph names are invisible to users, but they are crucial for type designers, developers, and software that processes text.</p>
+        <hr>
+        <h1><strong>2. Why Glyph Naming Is Needed</strong></h1>
+        <p>Glyph naming ensures that:</p>
+        <ol>
+            <li>
+                <p><strong>Every shape is uniquely identifiable</strong> &mdash; useful for editing, exporting, and OpenType feature building.</p>
+            </li>
+            <li>
+                <p><strong>Font editors and compilers</strong> (FontLab, GlyphsApp, FontForge, RoboFont) can correctly link each glyph to its Unicode codepoint.</p>
+            </li>
+            <li>
+                <p><strong>Python scripts</strong> and <strong>OpenType features</strong> can target glyphs precisely without ambiguity.</p>
+            </li>
+            <li>
+                <p><strong>Cross-software compatibility</strong> remains stable &mdash; a glyph named <code>kn_ka_i</code> will be recognized in any program that reads standard font data.</p>
+            </li>
+        </ol>
+        <p>Without proper naming, automation and feature generation become confusing or error-prone, especially for Indian scripts with hundreds of contextual forms.</p>
+        <hr>
+        <h1><strong>3. Is Unicode Not Enough?</strong></h1>
+        <p>Unicode defines&nbsp;<strong>codepoints</strong> &mdash; logical characters used by the operating system and text layout engines.<br>However, Unicode does <strong>not define how each character looks</strong> or how shapes interact visually.</p>
+        <p>For example:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Unicode Sequence</th>
+                    <th>Glyphs Rendered</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ಕ</td>
+                    <td>U+0C95</td>
+                    <td>single consonant glyph</td>
+                </tr>
+                <tr>
+                    <td>ಕಾ</td>
+                    <td>U+0C95 U+0CBE</td>
+                    <td><code>ka</code> + <code>matra_aa</code></td>
+                </tr>
+                <tr>
+                    <td>ಕ್ಕ</td>
+                    <td>U+0C95 U+0CCD U+0C95</td>
+                    <td><code>ka_halant</code> + <code>ka</code> = conjunct</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>To build those visual results, the font must contain glyphs such as <code>kn_k</code>, <code>kn_k_v</code>, <code>kn_k_aa</code>, and <code>kn_k_k</code>, which correspond to <strong>visual forms</strong>, not just Unicode points.</p>
+        <p>Thus, Unicode provides <em>text meaning</em>, but <strong>glyph naming defines text shaping</strong>.</p>
+        <hr>
+        <h1><strong>4. My Approach to Kannada Glyph Naming</strong></h1>
+        <p>Designing a Kannada typeface involves managing hundreds of glyphs.<br>To keep the project structured, consistent, and scriptable, a <strong>systematic naming model</strong> was created.</p>
+        <h3>The guiding principles were:</h3>
+        <ul>
+            <li>
+                <p>Use <strong>ASCII-only names</strong> (no Kannada characters in names).</p>
+            </li>
+            <li>
+                <p>Keep names <strong>short, clear, and consistent</strong>.</p>
+            </li>
+            <li>
+                <p>Ensure <strong>no conflict with English letters</strong> (so <code>a</code>, <code>i</code>, <code>u</code> are avoided).</p>
+            </li>
+            <li>
+                <p>Support <strong>automation</strong> and <strong>Python scripting</strong> in FontLab or GlyphsApp.</p>
+            </li>
+            <li>
+                <p>Allow expansion for <strong>ligatures</strong> and <strong>ottu (subjoined)</strong> forms.</p>
+            </li>
+        </ul>
+        <hr>
+        <h1><strong>5. The Prefix &ldquo;kn_&rdquo;</strong></h1>
+        <p>All Kannada glyphs begin with the prefix <code>kn_</code><br>This guarantees no clash with Latin or other script glyphs.</p>
+        <h3>Examples:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kannada</th>
+                    <th>Glyph Name</th>
+                    <th>Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ಅ</td>
+                    <td><code>kn_a</code></td>
+                    <td>Independent vowel a</td>
+                </tr>
+                <tr>
+                    <td>ಆ</td>
+                    <td><code>kn_aa</code></td>
+                    <td>Long vowel aa</td>
+                </tr>
+                <tr>
+                    <td>ಕ</td>
+                    <td><code>kn_k</code></td>
+                    <td>Base consonant ka</td>
+                </tr>
+                <tr>
+                    <td>ಕ್</td>
+                    <td><code>kn_k_v</code></td>
+                    <td>ka with virama</td>
+                </tr>
+                <tr>
+                    <td>ಕಾ</td>
+                    <td><code>kn_k_aa</code></td>
+                    <td>ka + aa matra</td>
+                </tr>
+                <tr>
+                    <td>ಕಿ</td>
+                    <td><code>kn_k_i</code></td>
+                    <td>ka + i matra</td>
+                </tr>
+                <tr>
+                    <td>ಕ್ಕ</td>
+                    <td><code>kn_k_k</code></td>
+                    <td>conjunct (ka + ka)</td>
+                </tr>
+                <tr>
+                    <td>ಕ್ಕ್ಕ</td>
+                    <td><code>kn_k_k_k</code></td>
+                    <td>triple conjunct</td>
+                </tr>
+                <tr>
+                    <td>ಕ್ಕ</td>
+                    <td><code>kn_k_ottu</code></td>
+                    <td>ottu form (half ka)</td>
+                </tr>
+                <tr>
+                    <td>ಕ್ಕ್ಕ<br></td>
+                    <td><code>kn_k_ottu2</code></td>
+                    <td>second ottu</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>This naming keeps the logic visible and expandable.</p>
+        <hr>
+        <h1><strong>6. Structural Rules</strong></h1>
+        <h2><strong>Independent vowels</strong></h2>
+        <pre><code>kn_a, kn_aa, kn_i, kn_ii, kn_u, kn_uu, kn_e, kn_ee, kn_ai, kn_o, kn_oo, kn_au
+        </code></pre>
+        <h2><strong>Consonants and halant</strong></h2>
+        <pre><code>kn_k, kn_kh, kn_g, kn_gh, kn_h kn_k_v, kn_kh_v, kn_g_v, kn_gh_v, &hellip; , kn_h_v</code></pre>
+        <h2><strong>Dependent vowel signs (matras)</strong></h2>
+        <pre><code>kn_m_aa, kn_m_i, kn_m_ii, kn_m_u, kn_m_uu, kn_m_e, kn_m_ee, kn_m_ai, kn_m_o, kn_m_oo, kn_m_au</code></pre>
+        <h2><strong>Consonant + Vowel combinations</strong></h2>
+        <p>Each consonant can combine with any matra:</p>
+        <pre><code>kn_k_aa, kn_k_i, kn_k_ii, kn_k_u, kn_k_uu, kn_k_e, kn_k_ee, kn_k_ai, kn_k_o, kn_k_oo, kn_k_au
+        </code></pre>
+        <h2><strong>Ottu and Second Ottu</strong></h2>
+        <pre><code>kn_k_ottu, kn_kh_ottu, kn_g_ottu, ...kn_k_ottu2, kn_kh_ottu2, kn_g_ottu2, ...</code></pre>
+        <h2><strong>Conjuncts</strong></h2>
+        <pre><code>kn_k_k, kn_k_kh, kn_t_t, kn_t_t_t, kn_n_dh, kn_sh_r</code></pre>
+        <h2><strong>Numbers and Signs</strong></h2>
+        <pre><code>kn_0, kn_1, kn_2, kn_3, kn_4, kn_5, kn_6, kn_7, kn_8, kn_9 kn_virama, kn_anuswara, kn_visarga</code></pre>
+        <hr>
+        <h1><strong>7. Why This Helps</strong></h1>
+        <ol>
+            <li>
+                <p><strong>Human-readable structure:</strong><br>A designer can instantly see the logic &mdash; <code>kn_k_ii</code> clearly means &ldquo;ka with long i&rdquo;.</p>
+            </li>
+            <li>
+                <p><strong>Consistency across tools:</strong><br>Works perfectly in FontLab, GlyphsApp, or FontForge.</p>
+            </li>
+            <li>
+                <p><strong>Predictable automation:</strong><br>Scripts can iterate or generate glyphs using string operations.</p>
+            </li>
+            <li>
+                <p><strong>GSUB/GPOS feature building:</strong><br>OpenType rules can target glyphs easily:</p>
+                <pre><code>lookup blwf {
+          sub kn_k_v kn_k by kn_k_k;
+        } blwf;</code></pre>
+            </li>
+            <li>
+                <p><strong>Future proofing:</strong><br>The <code>kn_</code> namespace keeps the font safe in multi-script families (Latin + Kannada).</p>
+            </li>
+        </ol>
+        <hr>
+        <h2><strong>8. Python Scripting and Naming Significance</strong></h2>
+        <p>Python scripting is the backbone of automation in modern font editors.<br>Good naming allows scripts to understand and manipulate glyphs systematically.</p>
+        <h3>Example:</h3>
+        <pre><code>font = fl.font
+        for g in font.glyphs:
+            if g.name.startswith(&quot;kn_k_&quot;):
+                print(&quot;ka-family glyph:&quot;, g.name)</code></pre>
+        <p>Or generating all CV forms:</p>
+        <pre><code>bases = [&quot;k&quot;,&quot;kh&quot;,&quot;g&quot;,&quot;gh&quot;,&quot;ch&quot;,&quot;j&quot;]
+        matras = [&quot;aa&quot;,&quot;i&quot;,&quot;ii&quot;,&quot;u&quot;,&quot;uu&quot;,&quot;e&quot;,&quot;ee&quot;,&quot;ai&quot;,&quot;o&quot;,&quot;oo&quot;,&quot;au&quot;]
+        for b in bases:
+            for m in matras:
+                new = f&quot;kn_{b}_{m}&quot;
+                print(&quot;Expected glyph:&quot;, new)</code></pre>
+        <p>OpenType feature scripts (<code>GSUB</code>,&nbsp;<code>GPOS</code>) can then use the same names.<br>The font and the script speak the <strong>same consistent language</strong>.</p>
+        <hr>
+        <h2><strong>9. Conclusion</strong></h2>
+        <p>Glyph naming is the hidden backbone of every well-engineered Kannada font.<br>Unicode defines the characters; glyph naming defines&nbsp;<strong>how they come alive</strong> visually.<br>A well-structured system such as the <code>kn_</code> model makes the design process more consistent, the code more predictable, and the collaboration between design and engineering seamless.</p>
+        <p>In a language as rich and dynamic as Kannada, thoughtful naming is not just organization &mdash;<br>it is <strong>clarity, automation, and professionalism</strong> combined.</p>
 
       <hr>
-
       <section class="related">
         <h3>Related posts</h3>
         <ul>
@@ -164,19 +293,21 @@
     </article>
   </main>
 
+<hr class="divider">
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-left">
-        <p>© <span id="year"></span> Arun C — All fonts distributed under Open Font License unless stated otherwise.</p>
+        <p>© <span id="year"></span> Arun CK -Website fully designed and developed independently by Arun CK.</br>All fonts distributed under Open Font License unless stated otherwise.</p>
       </div>
       <div class="footer-right">
         <nav class="social">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://github.com/imarunck" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/imarunck/" target="_blank" rel="noopener">LinkedIn</a>
         </nav>
       </div>
     </div>
   </footer>
+<hr class="divider">
 
   <script src="/js/main.js" defer></script>
   <script src="/js/article.js" defer></script>
