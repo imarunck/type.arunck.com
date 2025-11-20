@@ -46,3 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+const navLinks = document.querySelectorAll('.nav-list a');
+
+navLinks.forEach(link => {
+  const linkHref = link.getAttribute('href');
+  if (linkHref !== '/' && window.location.pathname.startsWith(linkHref)) {
+    link.setAttribute('aria-current', 'page');
+  }
+});

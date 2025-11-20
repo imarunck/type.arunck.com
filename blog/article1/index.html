@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Designing corner shapes for Kannada conjuncts — Arun CK</title>
+  <meta name="description" content="A process log on sketches, digital trials, and OpenType lookup choices used in GTN to solve stacked conjunct forms." />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Lexend & IBM Plex Sans (UI) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Shared + article styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/article.css">
+
+  <!-- Load GTN (optional) for inline specimens -->
+  <style>
+    @font-face{
+      font-family: "GTN";
+      src: url("/assets/webfonts/GTN-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+</head>
+<body class="page-article">
+
+  <a class="skip-link" href="#article">Skip to article</a>
+
+<!-- Header: same structure as main page -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <a href="/" class="logo" aria-label="Type by Arun CK">type<span class="dot">.arunck.com</span></a>
+        <p class="tagline">The digital shelf of everything I create in type design.</p>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+        <ul id="nav-list" class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/fonts/">Fonts</a></li>
+          <li><a href="/blog/" aria-current="page">Blog</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+      </nav>
+    </div>
+    <hr class="divider">
+  </header>
+
+  <main id="article" class="wrap article-content" role="main">
+    <!-- Hero Title -->
+    <header class="article-hero">
+      <h1 class="article-title">Designing corner shapes for Kannada conjuncts</h1>
+      <div class="meta">
+        <time datetime="2025-10-09">October 9, 2025</time>
+        <span class="meta-sep">•</span>
+        <span class="author">By <a href="/about/">Arun C K</a></span>
+        <div class="share">
+          <button class="share-btn" data-service="twitter" aria-label="Share on Twitter">Twitter</button>
+          <button class="share-btn" data-service="linkedin" aria-label="Share on LinkedIn">LinkedIn</button>
+          <button class="share-btn" id="copyLinkBtn" aria-label="Copy article link">Copy link</button>
+        </div>
+      </div>
+
+      <!-- Feature image -->
+      <figure class="feature-image">
+        <img src="/assets/images/blog/article1-720x405.jpg" alt="Sketches and glyph trials for Kannada conjuncts" width="720" height="405">
+        <figcaption>Sketches and trials: exploring corner forms for stacked conjuncts.</figcaption>
+      </figure>
+    </header>
+
+    <!-- Article body -->
+    <article class="prose" aria-label="Article body">
+      <p class="lead">
+        This is a short process log describing how I approached the corner and knot shapes for stacked conjuncts while designing <strong>GTN</strong>.
+        It covers research, sketches, digital trials and the OpenType strategies used to implement robust rendering across platforms.
+      </p>
+
+      <h2 id="problem">Problem: stacking and visual rhythm</h2>
+      <p>
+        Kannada conjuncts present a challenge when multiple consonants stack or follow with vowel signs. Corner geometry — where two strokes meet or bend — strongly
+        influences optical color and readability in text. My objective was to craft corner shapes that:
+      </p>
+      <ul>
+        <li>remain legible at small sizes (12–16px)</li>
+        <li>avoid visual collisions in tight metrics</li>
+        <li>render consistently across rasterizers (browser engines, HarfBuzz, native apps)</li>
+      </ul>
+
+      <h2 id="research">Research & sketches</h2>
+      <p>
+        I began by collecting printed samples and screenshots across UI contexts (web, mobile, e-books). Then I made pencil sketches focusing on:
+      </p>
+      <ol>
+        <li>the shoulder of the consonant where ligation occurs</li>
+        <li>how vowel signs attach without creating dense ink traps</li>
+        <li>negative space to preserve distinct counters</li>
+      </ol>
+
+      <figure class="inline-figure">
+        <img src="/assets/images/blog/sketches-900x360.jpg" alt="Paper sketches of conjunct shapes" width="900" height="360">
+        <figcaption>Paper sketches — exploring corner radius and junction shapes.</figcaption>
+      </figure>
+
+      <h2 id="digital-workflow">Digital workflow</h2>
+      <p>
+        In FontLab I translated the sketches into Bézier shapes. Key steps:
+      </p>
+      <ul>
+        <li>Start from a few base strokes and reuse them for similar corners to maintain consistency across glyphs.</li>
+        <li>Use boolean operations carefully; clean up nodes to avoid accidental overlaps that hint poorly.</li>
+        <li>Export test builds frequently to verify rendering in the browser and the desktop apps.</li>
+      </ul>
+
+      <h3>Reusable corner components</h3>
+      <p>
+        I created a small library of corner components (left shoulder, right shoulder, rounded knot). These were placed as masters and scaled or mirrored as needed.
+        Reusable components reduce visual drift between related conjunct forms and simplify fixing issues across the family.
+      </p>
+
+      <h2 id="features">OpenType & feature choices</h2>
+      <p>
+        Implementation choices focused on robust behavior rather than visual-only solutions:
+      </p>
+      <ul>
+        <li><code>ccmp</code> for composition/decomposition corrections.</li>
+        <li><code>locl</code> to enable Kannada-specific alternates in environments that need them.</li>
+        <li>When stacking required special shapes I used <code>rphf</code>/<code>akhn</code>/<code>blwf</code> style lookups and carefully ordered them to avoid unintended substitutions.</li>
+      </ul>
+
+      <h2 id="testing">Testing & results</h2>
+      <p>
+        Testing is iterative: after each change I generate variable and static builds and load them in:
+      </p>
+      <ul>
+        <li>Chrome, Firefox and WebKit-based browsers</li>
+        <li>Android text renderers and select e-readers</li>
+        <li>Desktop apps (Word, LibreOffice) for fallback behavior</li>
+      </ul>
+      <p>
+        The result in <strong>GTN</strong> is a set of corner shapes that hold up at small sizes and reduce perceived collisions inside dense lines. Using shared components improved fix velocity — a bug in a base corner only needed a single correction that cascaded to derived glyphs.
+      </p>
+
+      <h2 id="conclusion">Conclusion</h2>
+      <p>
+        Solving corner shapes is part drawing, part engineering. A consistent system of components plus careful OpenType lookup ordering made the shapes robust across platforms.
+        If you want to see the glyph set or test the font, visit the <a href="/fonts/GTN/">GTN page</a>.
+      </p>
+
+      <hr>
+
+      <section class="related">
+        <h3>Related posts</h3>
+        <ul>
+          <li><a href="/blog/article2/">Testing GTN across browsers and devices</a></li>
+          <li><a href="/blog/article3/">OpenType patterns for Kannada: rphf & akhn in practice</a></li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-left">
+        <p>© <span id="year"></span> Arun C — All fonts distributed under Open Font License unless stated otherwise.</p>
+      </div>
+      <div class="footer-right">
+        <nav class="social">
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener">Twitter</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+  <script src="/js/article.js" defer></script>
+</body>
+</html>

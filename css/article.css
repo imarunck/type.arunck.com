@@ -1,0 +1,51 @@
+/* article.css — styles for blog article pages (builds on main.css variables) */
+
+:root{
+  --article-max-width: 820px;
+  --prose-color: #222;
+}
+
+/* layout */
+.article-content{ padding:1rem 0; }
+.article-hero{ margin-bottom:1rem; }
+.article-title{ font-size:2rem; color:var(--brand); margin:0 0 .5rem; line-height:1.05; }
+.meta{ display:flex; gap:.6rem; align-items:center; color:var(--muted); font-size:.95rem; justify-content:space-between; flex-wrap:wrap; }
+.meta .share{ margin-left:auto; display:flex; gap:.5rem; align-items:center; }
+
+/* Feature image */
+.feature-image{ margin-top:1rem; margin-bottom:1rem; }
+.feature-image img{ width:100%; max-width:720px; height:auto; display:block; border-radius:6px; box-shadow: 0 8px 22px rgba(0,0,0,0.04); }
+.feature-image figcaption{ font-size:.9rem; color:var(--muted); margin-top:.35rem; }
+
+/* Prose */
+.prose{
+  max-width:var(--article-max-width);
+  color:var(--prose-color);
+  font-size:1rem;
+  line-height:1.65;
+  margin:1rem 0 2rem;
+}
+.prose .lead{ font-size:1.05rem; font-weight:600; margin-bottom:.8rem; color:var(--text); }
+.prose h2{ font-size:1.15rem; margin-top:1.15rem; color:var(--text); }
+.prose h3{ font-size:1.02rem; margin-top:1rem; }
+.prose p{ margin:0.6rem 0; }
+.prose ul, .prose ol{ margin:0.6rem 0 0.6rem 1.1rem; }
+
+/* Inline figure */
+.inline-figure{ margin:1rem 0; }
+.inline-figure img{ width:100%; border-radius:6px; display:block; }
+
+/* Related posts */
+.related ul{ list-style:none; padding:0; margin:0.4rem 0 1rem; }
+.related li{ margin:0.35rem 0; }
+
+/* Share buttons */
+.share-btn{ background:transparent; border:1px solid rgba(0,0,0,0.06); padding:.35rem .6rem; border-radius:6px; cursor:pointer; font-weight:600; color:var(--brand); }
+.share-btn:hover{ background:rgba(175,28,46,0.04); }
+
+/* Responsive */
+@media (max-width:820px){
+  .article-title{ font-size:1.6rem; }
+  .meta{ flex-direction:column; align-items:flex-start; gap:.35rem; }
+  .feature-image img{ max-width:100%; }
+}

@@ -8,7 +8,7 @@
 .ack { color:var(--text); }
 
 /* Fonts list area */
-.fonts-list{ display:flex; flex-direction:column; gap:1rem; margin-top:1rem; }
+.fonts-list{ display:flex; flex-direction:column; gap:1rem; margin-top:1rem; margin-bottom:1rem; }
 .font-item{
   display:flex;
   align-items:center;
@@ -17,6 +17,8 @@
   padding:1rem;
   border-radius:8px;
   transition:background .12s ease, transform .08s ease;
+  background-color:var(--typebox);
+
 }
 .font-item:hover{ transform:translateY(-2px); background:rgba(175,28,46,0.03); }
 
@@ -43,7 +45,7 @@
   line-height:1;
   font-weight:600;
   margin-bottom:.25rem;
-  color:var(--brand);
+  color:var(--text);
   letter-spacing: .02em;
 }
 
