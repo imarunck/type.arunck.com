@@ -220,10 +220,77 @@ a:active {
 
 @media (max-width: 768px) {
   html, body {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    margin-left: 0rem !important;
+    margin-right: 0rem !important;
   }
 }
+
+/* ---------------------------------------
+   MOBILE NAV + BRAND RESPONSIVE
+---------------------------------------- */
+@media (max-width: 640px) {
+
+  /* brand area smaller */
+  .brand .logo {
+    font-size: 1.5rem;
+    letter-spacing: .03em;
+  }
+
+  .tagline {
+    font-size: .85rem;
+  }
+
+  /* show hamburger */
+  .nav-toggle {
+    display: block;
+    font-size: 1.6rem;
+    padding: .25rem .5rem;
+  }
+
+  /* hide the nav by default */
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    gap: .75rem;
+    background: white;
+    width: 100%;
+    padding: 1rem 0;
+    margin-top: .5rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* when nav-open class is applied (via JS) */
+  .nav-list.open {
+    display: flex;
+  }
+
+  /* links smaller & centered */
+  .nav-list a {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: .5rem 1rem;
+    width: 100%;
+  }
+
+  /* entire header stacked */
+  .site-header .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 860px){
+  .post-media {
+    width: 100%;
+    height: auto;      /* important */
+  }
+  .post-media img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
 
 
 /* small helpers */

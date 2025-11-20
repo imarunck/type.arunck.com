@@ -49,3 +49,10 @@
   .meta{ flex-direction:column; align-items:flex-start; gap:.35rem; }
   .feature-image img{ max-width:100%; }
 }
+
+@media (max-width: 768px) {
+  html, body {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+}
