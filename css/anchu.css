@@ -1,4 +1,4 @@
-/* gtn.css - GTN single font page styles (depends on variables in /css/main.css) */
+/* anchu.css - anchu single font page styles (depends on variables in /css/main.css) */
 
 :root{
   --specimen-max-width: 980px;
@@ -9,7 +9,7 @@
 .hero-title{ color:var(--brand); font-size:2rem; }
 .hero-actions{ margin-top:.75rem; display:flex; gap:.6rem; }
 
-/* Big name rendered in GTN */
+/* Big name rendered in anchu */
 .big-name{ margin-top:1rem; display:flex; flex-direction:column; gap:.6rem; align-items:flex-start; }
 .name-display{
   font-family: "anchu", ui-monospace, Menlo, monospace;

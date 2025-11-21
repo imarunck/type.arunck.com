@@ -1,4 +1,4 @@
-// gtn.js - interactions for GTN font page
+// anchu.js - interactions for anchu font page
 
 document.addEventListener('DOMContentLoaded', function () {
   // Common behaviors from main.js are also loaded; set year if not already

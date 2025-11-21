@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.innerWidth <= 640) navList.style.display = 'none';
   }
 
-  // Variable-weight demo (if GTN variable is available)
+  // Variable-weight demo (if variable is available)
   const weightRange = document.getElementById('weightRange');
   const specimen = document.getElementById('specimenText');
 
