@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Type By Arun CK</title>
-  <meta name="description" content="Anchu — a text-first Kannada typeface by Arun CK. Specimens, downloads, and testing tool." />
+  <meta name="description" content="Karnata-GTN — a text-first Kannada typeface by Arun CK. Specimens, downloads, and testing tool." />
   <link rel="icon" href="/favicon.ico" />
 
  <!-- Lexend & IBM Plex Sans (UI) -->
@@ -14,7 +14,7 @@
 
   <!-- Shared + page styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/anchu.css">
+  <link rel="stylesheet" href="/css/Karnata-GTN.css">
 
   <!-- Local Anchu webfont - adjust file names if yours differ -->
   <style>
@@ -27,6 +27,19 @@
       font-display: swap;
     }
   </style>
+
+  <style>
+    @font-face{
+      font-family: "Karnata-GTN";
+      src: url("assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype"),
+           url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+
 </head>
 <body class="page-anchu">
 
@@ -56,13 +69,13 @@
   <main id="main" class="wrap main-content" role="main">
     <!-- Hero -->
     <section class="hero">
-      <!-- Title in site theme only (not rendered in anchu) -->
-      <h1 class="hero-title">Anchu Kannada Font</h1>
-      <p class="hero-sub">A compact, legible Kannada text family for UI & print.</p>
+      <!-- Title in site theme only (not rendered in Karnata-GTN) -->
+      <h1 class="hero-title">Karnata-GTN Kannada Font</h1>
+      <p class="hero-sub">A Variable script font for Kannada + Latin.</p>
 
       <div class="hero-actions">
         <!-- Replace href with your high-speed download link -->
-        <a class="btn primary" id="downloadBtn" href="https://github.com/imarunck/Anchu/releases/download/Releases/Anchu-Kannada-Regular.zip" rel="noopener" download>Download</a>
+        <a class="btn primary" id="downloadBtn" href="https://github.com/sanchaya/karnata-gtn-font/archive/refs/heads/main.zip" rel="noopener" download>Download</a>
         <a class="btn ghost" href="/fonts/">See other fonts</a>
       </div>
     </section>
@@ -71,33 +84,47 @@
 
     <!-- Big name in its own style -->
     <section class="big-name">
-      <!-- This renders the font name using the anchu face -->
-      <div class="name-display" id="nameDisplay" aria-hidden="true">ಅಂಚು</div>
+      <!-- This renders the font name using the Karnata-GTN face -->
+      <div class="name-display" id="nameDisplay" aria-hidden="true">ಕರ್ಣಾಟ ಜಿ ಟಿ ಎನ್</div>
     <!--<p class="two-line-desc">Optimized for on-screen reading at small sizes. Balances compact counters with open shapes for clear line color.</p>-->
     </section>
 
     <hr class="divider">
 
-          <h2 id="testingHeading">Type testing -Type below to preview text</h2>
-
-
-    <!-- Type testing 
+    <!-- Type testing -->
     <section class="type-testing" aria-labelledby="testingHeading">
-      <h2 id="testingHeading">Type testing</h2>
+      <h2 id="testingHeading">Type testing -Type below to preview text</h2>
 
-      <div class="controls">
-        <label for="weightRange">Weight <output id="weightVal">400</output></label>
-        <input id="weightRange" type="range" min="200" max="800" step="1" value="400" />
+    <div class="controls">
+      <label for="weightPreset">Weight preset</label>
+      <select id="weightPreset" aria-label="Weight preset">
+        <option value="400">Regular (400)</option>
+        <option value="500">Medium (500)</option>
+        <option value="600">SemiBold (600)</option>
+        <option value="700">Bold (700)</option>
+        <option value="800">ExtraBold (800)</option>
+        <option value="900">Black (900)</option>
+      </select>
 
-        <label for="sizeSelect">Size</label>
-        <select id="sizeSelect" aria-label="Specimen size">
-          <option value="18">18px</option>
-          <option value="24">24px</option>
-          <option value="32">32px</option>
-          <option value="48" selected>48px</option>
-          <option value="72">72px</option>
-        </select>
-      </div>  -->
+      <label for="weightRange">
+        Weight <output id="weightVal">400</output>
+      </label>
+      <input id="weightRange" type="range" min="400" max="900" step="1" value="400" />
+
+      <label for="sizeSelect">Size</label>
+      <select id="sizeSelect" aria-label="Specimen size">
+        <option value="18">18px</option>
+        <option value="24">24px</option>
+        <option value="32">32px</option>
+        <option value="48" selected>48px</option>
+        <option value="72">72px</option>
+      </select>
+
+      <button id="playWeight" type="button" aria-label="Animate weight axis">
+       ▶ Play
+      </button>
+    </div>
+
 
       <div class="testing-area">
       <!--<label for="specimen" class="visually-hidden">Editable specimen text</label>-->
@@ -112,25 +139,40 @@
       </div>
     </section>
 
-    <hr class="divider">
+<section class="font-credits" aria-labelledby="creditsHeading">
+  <h2 id="creditsHeading">Credits &amp; Font Information</h2>
 
-    <!-- Technical & usage hints 
-    <section class="tech">
-      <h2>Usage notes</h2>
-      <ul>
-        <li>Recommended line-height: 1.4 for body text at 16–20px.</li>
-        <li>CSS stack: <code>'anchu', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;</code></li>
-        <li>OpenType features: <code>ccmp</code>, <code>locl(kn)</code>, <code>mark</code>, <code>mkmk</code>.</li>
-      </ul>
-    </section> -->
+  <ul class="credits-inline">
+    <li><strong>Font name:</strong> Karnata-GTN</li>
+    <li><strong>Project by:</strong> <a href="https://sanchaya.org" target="_blank" rel="noopener">Sanchaya.org</a></li>
+    <li><strong>Commissioned by:</strong> <a href="https://sanchaya.org" target="_blank" rel="noopener">Sanchaya.org</a></li>
+    <li><strong>Scripts supported:</strong> Kannada, Latin</li>
+    <li><strong>Styles / Weights:</strong> Regular, Medium, SemiBold, Bold, ExtraBold, Black (400–900)</li>
+    <li><strong>Typeface designer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
+    <li><strong>Supported by:</strong> Sanchaya Community &amp; Contributors</li>
+    <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank" rel="noopener">SIL Open Font License (OFL)</a></li>
+    <li><strong>Glyph count:</strong> 530+ glyphs</li>
+    <li><strong>Font technology:</strong> Variable Font (wght axis)</li>
+    <li>
+      <strong>My contribution:</strong>
+      typeface design, glyph drawing, spacing &amp; kerning,
+      OpenType feature development, variable font production,
+      testing across platforms, and release preparation.
+    </li>
+  </ul>
+</section>
+
+
+
+
+    <hr class="divider">
 
   </main>
 
 <div id="site-footer"></div>
 
-
   <!-- scripts -->
   <script src="/js/main.js" defer></script>
-  <script src="/js/anchu.js" defer></script>
+  <script src="/js/Karnata-GTN.js" defer></script>
 </body>
 </html>

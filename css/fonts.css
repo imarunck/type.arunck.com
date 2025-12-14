@@ -53,6 +53,11 @@
 .specimen-name.anchu{ font-family: "anchu", ui-monospace, Menlo, monospace; font-weight:400; }
 .specimen-name.upcoming-sample{ font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight:600; font-style:italic; }
 
+/* Apply specific font family when available */
+.specimen-name.Karnata-GTN{ font-family: "Karnata-GTN", ui-monospace, Menlo, monospace; font-weight:400; }
+.specimen-name.upcoming-sample{ font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight:600; font-style:italic; }
+
+
 /* Description clickable */
 .font-desc{ margin:.25rem 0 .5rem; color:var(--muted); font-size:.97rem; }
 .font-desc.clickable{ cursor:pointer; }

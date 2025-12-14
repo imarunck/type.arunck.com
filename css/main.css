@@ -51,6 +51,11 @@ p, li, span {
   font-weight: var(--weight-regular);
 }
 
+.site-footer p {
+  font-weight: 300;
+}
+
+
 
 /* Global code styling */
 code, pre, pre code {
@@ -158,7 +163,7 @@ a:active {
   font-size:.95rem;
 }
 .btn.primary{ background:var(--brand); color:#fff; box-shadow: none;}
-.btn.primary.home{ background:var(--brand); color:#fff; box-shadow: none; margin-top: 2rem; margin-right: 2rem; }
+.btn.primary.home{ background:var(--brand); color:#fff; box-shadow: none; margin-top: 1rem; margin-bottom: 2rem; margin-right: 2rem; }
 .btn.ghost{ background:transparent; color:var(--brand); border-color:var(--brand); }
 
 /* Divider (single line) */
@@ -287,3 +292,9 @@ a:active {
 
 /* small helpers */
 code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-size:.92em; }
+
+.page-root main,
+.page-about main,
+.page-fonts main,
+.page-blog main,
+.page-article main { min-height: calc(100vh - 180px); }

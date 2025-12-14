@@ -21,12 +21,26 @@
     @font-face{
       font-family: "anchu";
       src: url("assets/webfonts/Anchu-Kannada-Regular.woff") format("woff"),
-           url("/assets/webfonts/Anchu-Kannada-Regular.woff") format("woff");
+           url("/assets/webfonts/Anchu-Kannada-Regular.woff") format("woff"); 
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
     }
   </style>
+
+  <style>
+    @font-face{
+      font-family: "Karnata-GTN";
+      src: url("assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype"),
+           url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+
+
 </head>
 <body class="page-fonts">
 
@@ -37,7 +51,7 @@
     <div class="wrap header-inner">
       <div class="brand">
         <a href="/" class="logo" aria-label="Type by Arun CK">type<span class="dot">.arunck.com</span></a>
-        <p class="tagline">The digital shelf of everything I create in type design.</p>
+        <p class="tagline">The digital shelf of everything I create in typeface design.</p>
       </div>
 
       <nav class="site-nav" aria-label="Primary">
@@ -63,6 +77,31 @@
     <!-- Released fonts (no section title as requested) -->
     <section class="fonts-list" aria-label="Released fonts">
           <hr class="divider">
+
+
+          <!-- Font item: Karnata-GTN -->
+      <a href="/fonts/Karnata-GTN/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name Karnata-GTN">ಕರ್ಣಾಟ ಜಿ ಟಿ ಎನ್</span>
+          </span>
+          <p class="font-desc">
+            A Variable script font for Kannada + Latin.
+          </p>
+          <div class="font-meta">
+            <span class="badge">Variable</span>
+            <span class="badge">Kannada</span>
+            <span class="badge">sanchaya.org</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+            <span class="btn ghost">View</span>
+        </div>
+      </article>
+      </a>
+      <hr class="divider">
       <!-- Font item: Anchu Kannada (released) -->
       <a href="/fonts/anchu/" class="font-item-link">
       <article class="font-item">
@@ -115,21 +154,8 @@
 
   </main>
 
-<hr class="divider">
-  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <div class="footer-left">
-        <p>© <span id="year"></span> Arun CK -Website fully designed and developed independently by Arun CK.</br>All fonts distributed under Open Font License unless stated otherwise.</p>
-      </div>
-      <div class="footer-right">
-        <nav class="social">
-          <a href="https://github.com/imarunck" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/imarunck/" target="_blank" rel="noopener">LinkedIn</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
-<hr class="divider">
+<div id="site-footer"></div>
+
 
   <!-- scripts: shared + page -->
   <script src="/js/main.js" defer></script>

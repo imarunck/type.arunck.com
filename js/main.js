@@ -55,3 +55,15 @@ navLinks.forEach(link => {
     link.setAttribute('aria-current', 'page');
   }
 });
+
+
+fetch("/partials/footer.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("site-footer").innerHTML = html;
+
+    // update year
+    const y = document.getElementById("year");
+    if (y) y.textContent = new Date().getFullYear();
+  })
+  .catch(err => console.error("Footer load failed:", err));
