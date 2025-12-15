@@ -147,9 +147,9 @@ a:active {
 
 
 /* Hero */
-.hero{ padding:1.25rem 0 0 0; display:grid; align-items:center; gap:.75rem; }
+.hero{ padding:1.25rem 0 0 0; display:grid; align-items:center; gap:.2rem; }
 .hero-title{ margin:0; font-size:2rem; font-weight: 600; color:var(--brand); line-height:1.08; }
-.hero-sub{ margin:.5rem 0 1rem; color:var(--muted) }
+.hero-sub{ margin:.5rem 0 0.5rem; color:var(--muted) }
 .hero-ctas{ display:flex; gap:.75rem; flex-wrap:wrap; }
 
 /* Buttons */

@@ -14,7 +14,7 @@
 .name-display{
   font-family: "Karnata-GTN", ui-monospace, Menlo, monospace;
   font-variation-settings: '"wght" 400';
-  font-size:8.5rem; /* large display */
+  font-size:7.5rem; /* large display */
   line-height:0.9;
   letter-spacing: -0.02em;
   color:var(--brand);
@@ -150,7 +150,7 @@
 }
 
 .font-credits {
-  margin: 1.5rem 0;
+  margin: 0 0;
   max-width: 760px;
 }
 
@@ -166,10 +166,14 @@
 }
 
 .credits-inline li {
+  display: grid;
+  grid-template-columns: 200px 1fr; /* fixed label column */
+  gap: .5rem;
   margin: .35rem 0;
   color: var(--muted);
   line-height: 1.5;
 }
+
 
 .credits-inline strong {
   color: var(--text);
