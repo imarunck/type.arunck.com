@@ -16,104 +16,94 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/fonts.css">
 
-  <!-- Load local webfonts for specimens (adjust names if needed) -->
+  <!-- Local webfonts -->
   <style>
     @font-face{
       font-family: "anchu";
-      src: url("assets/fonts/Anchu-Kannada-Regular.woff") format("woff"),
-           url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff"); 
+      src: url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
     }
-  </style>
 
-  <style>
     @font-face{
       font-family: "Karnata-GTN";
-      src: url("assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype"),
-           url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      src: url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+        @font-face{
+      font-family: "SRIRAJUB";
+      src: url("/assets/sriraju/SRIRAJUB.TTF") format("truetype");
+      font-style: normal;
+      font-display: swap;
+    }
+
+      @font-face{
+      font-family: "Karnata-Wesleyan";
+      src: url("/assets/fonts/KarnataWesleyanMissionPress.otf") format("opentype");
       font-weight: 400 900;
       font-style: normal;
       font-display: swap;
     }
   </style>
-
-
-
 </head>
+
 <body class="page-fonts">
 
-  <a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Header: same structure as main page -->
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <div class="brand">
-        <a href="/" class="logo" aria-label="Type by Arun CK">type<span class="dot">.arunck.com</span></a>
-        <p class="tagline">The digital shelf of everything I create in typeface design.</p>
-      </div>
-
-      <nav class="site-nav" aria-label="Primary">
-        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
-        <ul id="nav-list" class="nav-list">
-          <li><a href="/">Home</a></li>
-          <li><a href="/fonts/" aria-current="page">Fonts</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/about/">About</a></li>
-        </ul>
-      </nav>
-    </div>
-    <hr class="divider">
-  </header>
-
-  <main id="main" class="wrap main-content" role="main">
-    <section class="hero">
-      <h1 class="hero-title">Type by <span class="ack">Arun CK</span></h1>
-    <!--<p class="hero-sub">Catalog of released families and upcoming releases. Click any item to view specimen, technical notes and downloads.</p>-->
-    </section>
-
-
-    <!-- Released fonts (no section title as requested) 
-    <section class="fonts-list" aria-label="Released fonts">
-          <hr class="divider">
-          <h2><strong>Project by:</strong> <a href="https://sanchaya.org" target="_blank" rel="noopener">Sanchaya.org</a></h2> -->
-          <!-- Font item: Karnata-GTN 
-      <a href="/fonts/Karnata-GTN/" class="font-item-link">
-      <article class="font-item">
-        <div class="font-left">
-          <span class="font-name">
-            <span class="specimen-name Karnata-GTN">ಕರ್ಣಾಟ ಜಿ ಟಿ ಎನ್</span>
-          </span>
-          <p class="font-desc">
-            A Variable script font for Kannada + Latin.
-          </p>
-          <div class="font-meta">
-            <span class="badge">Variable</span>
-            <span class="badge">Kannada</span>
-            <span class="badge">sanchaya.org</span>
-          </div>
-        </div>
-
-        <div class="font-right">
-            <span class="btn ghost">View</span>
-        </div>
-      </article>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="brand">
+      <a href="/" class="logo" aria-label="Type by Arun CK">
+        type<span class="dot">.arunck.com</span>
       </a>
-      <hr class="divider">  -->
+      <p class="tagline">
+        The digital shelf of everything I create in typeface design.
+      </p>
+    </div>
 
-    <h2><strong>Project by:</strong> <a href="/about/" target="_blank" rel="noopener">Arun CK</a></h2>
+    <nav class="site-nav" aria-label="Primary">
+      <button id="nav-toggle" class="nav-toggle"
+              aria-expanded="false" aria-controls="nav-list">☰</button>
+      <ul id="nav-list" class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/fonts/" aria-current="page">Fonts</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+  </div>
+  <hr class="divider">
+</header>
 
-      <!-- Font item: Anchu Kannada (released) -->
-      <a href="/fonts/anchu/" class="font-item-link">
+<main id="main" class="wrap main-content" role="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-title">Type by <span class="ack">Arun CK</span></h1>
+  </section>
+
+  <!-- Released -->
+  <section class="fonts-list" aria-label="Released fonts">
+
+<h2 id="my-fonts"><strong>My Fonts</strong></h2>
+
+    <a href="/fonts/anchu/" class="font-item-link">
       <article class="font-item">
         <div class="font-left">
           <span class="font-name">
             <span class="specimen-name anchu">ಅಂಚು ಕನ್ನಡ ಫಾಂಟ್</span>
           </span>
+
           <p class="font-desc">
-            A monospace companion for editorial and code-like layouts — compact, readable glyphs for Kannada + Latin.
+            A monospace companion for editorial and code-like layouts —
+            compact, readable glyphs for Kannada + Latin.
           </p>
+
           <div class="font-meta">
             <span class="badge">Kannada</span>
             <span class="badge">Bitmap</span>
@@ -122,46 +112,95 @@
         </div>
 
         <div class="font-right">
-            <span class="btn ghost">View</span>
+          <span class="btn ghost">View</span>
         </div>
       </article>
-      </a>
+    </a>
 
-    </section>
-      <hr class="divider">
+     <h2 id="my-fonts"><strong>Maintaining</strong></h2>
 
-
-    <!-- Upcoming section
-    <section class="upcoming">
-      <h2>Upcoming</h2>
-
-      <article class="font-item upcoming-item" data-href="/fonts/family-b/">
+    <a href="/fonts/sriraju/" class="font-item-link">
+      <article class="font-item">
         <div class="font-left">
-          <button class="font-name" data-target="/fonts/family-b/" aria-label="Open Family B page">
-            <span class="specimen-name upcoming-sample">Family B (upcoming)</span>
-          </button>
-          <p class="font-desc clickable" data-target="/fonts/family-b/">
-            Display family for headings and signage — currently in testing (release planned).
-          </p>
+          <span class="font-name">
+            <span class="specimen-name sriraju">ಶ್ರೀರಾಜು ಕನ್ನಡ ಫಾಂಟ್</span>
+          </span>
+
+          <p class="font-desc">a Kannada typeface designed by Nagalingappa Badiger. Published by Sugata Srinivasaraju.</p>
+
           <div class="font-meta">
-            <span class="badge">Display</span>
-            <span class="badge muted">Planned</span>
+            <span class="badge">Outline</span>
+            <span class="badge">Kannada</span>
           </div>
         </div>
+
         <div class="font-right">
-          <a class="btn" href="/fonts/family-b/">View</a>
-          <a class="btn ghost" href="/fonts/family-b/">Download</a>
+          <span class="btn ghost">View</span>
         </div>
       </article>
-    </section>   -->
+    </a>
 
-  </main>
+    <h2 id="my-fonts"><strong>Upcoming</strong></h2>
+
+    <a href="/fonts/Karnata-GTN/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name Karnata-GTN">ಕರ್ನಾಟ ಜಿ ಟಿ ಎನ್</span>
+          </span>
+
+          <p class="font-desc">
+            A Variable script font for Kannada + Latin.
+          </p>
+
+          <div class="font-meta">
+            <span class="badge">Variable</span>
+            <span class="badge">Kannada</span>
+            <span class="badge">sanchaya.org</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+          <span class="btn ghost">View</span>
+        </div>
+      </article>
+    </a>
+
+        <a href="/fonts/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name Karnata-Wesleyan">ಕರ್ನಾಟ-ವೆಸ್ಲಿಯನ್-ಮಿಷನ್-ಪ್ರೆಸ್</span>
+          </span>
+
+          <p class="font-desc">
+            A Font By Sanchi Foundation.</p>
+
+          <div class="font-meta">
+            <span class="badge">Revival</span>
+            <span class="badge">Kannada</span>
+            <span class="badge">OTF</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+          <span class="btn ghost">View</span>
+        </div>
+      </article>
+    </a>
+
+
+    
+
+
+  </section>
+
+</main>
 
 <div id="site-footer"></div>
 
+<script src="/js/main.js" defer></script>
+<script src="/js/fonts.js" defer></script>
 
-  <!-- scripts: shared + page -->
-  <script src="/js/main.js" defer></script>
-  <script src="/js/fonts.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="kn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Type By Arun CK</title>
+  <meta name="description" content="SriRaju Kannada Font — a Kannada typeface designed by Nagalingappa Badiger. Published by Sugata Srinivasaraju." />
+  <link rel="icon" href="/favicon.ico" />
+
+ <!-- Lexend & IBM Plex Sans (UI) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Shared + page styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/sriraju.css">
+
+  <!-- Local Anchu webfont - adjust file names if yours differ -->
+  <style>
+    @font-face{
+      font-family: "anchu";
+      src: url("assets/fonts/Anchu-Kannada-Regular.woff") format("woff"),
+           url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <style>
+    @font-face{
+      font-family: "Karnata-GTN";
+      src: url("assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype"),
+           url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+  font-family: "SRIRAJBI";
+  src: url("/assets/sriraju/SRIRAJBI.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SRIRAJUB";
+  src: url("/assets/sriraju/SRIRAJUB.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SRIRAJUI";
+  src: url("/assets/sriraju/SRIRAJUI.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SRIRAJUO";
+  src: url("/assets/sriraju/SRIRAJUO.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SRIRAJUR";
+  src: url("/assets/sriraju/SRIRAJUR.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SRIRAJOI";
+  src: url("/assets/sriraju/SRIRAUOI.ttf") format("truetype");
+}
+
+
+  </style>
+
+
+</head>
+<body class="page-anchu">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header (same as other pages) -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <a href="/" class="logo" aria-label="Type by Arun CK">type<span class="dot">.arunck.com</span></a>
+        <p class="tagline">The digital shelf of everything I create in typeface design.</p>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+        <ul id="nav-list" class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/fonts/">Fonts</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+      </nav>
+    </div>
+    <hr class="divider">
+  </header>
+
+
+  <main id="main" class="wrap main-content" role="main">
+    
+
+        <section class="hero">
+      <!-- Title in site theme only (not rendered in anchu) -->
+      <h1 class="hero-title">SriRaju Kannada Font</h1>
+      <p class="hero-sub">a Kannada typeface designed by Nagalingappa Badiger. Published by Sugata Srinivasaraju.</p>
+
+      <div class="hero-actions">
+        <!-- Replace href with your high-speed download link -->
+        <a class="btn primary" id="downloadBtn" href="https://github.com/imarunck/Sri-Raju-Fonts/releases/download/Release/Sri-Raju-fonts-1.0.zip" rel="noopener" download>Download</a>
+        <a class="btn ghost" href="/fonts/">See other fonts</a>
+      </div>
+    </section>
+
+
+    <!-- Big name in its own style -->
+    <section class="big-name">
+      <!-- This renders the font name using the Karnata-GTN face -->
+      <div class="name-display" id="nameDisplay" aria-hidden="true">ಶ್ರೀರಾಜು ಕನ್ನಡ ಫಾಂಟ್</div>
+    </section>
+
+    <hr class="divider">
+
+<!-- Type testing -->
+<section class="type-testing" aria-labelledby="testingHeading">
+  <h2 id="testingHeading">Type testing — Type below to preview text</h2>
+
+  <div class="controls">
+
+    <!-- Style selector (replaces weight slider) -->
+    <label for="styleSelect">Style</label>
+    <select id="styleSelect" aria-label="Font style">
+    <option value="SRIRAJUB">Bold</option>
+      <option value="SRIRAJBI">Bold Italic</option>
+      <option value="SRIRAJUI">Regular Italic</option>
+      <option value="SRIRAJUO">Outline</option>
+      <option value="SRIRAJUR">Regular</option>
+      <option value="SRIRAJOI">Outline Italic</option>
+    </select>
+
+    <!-- Size selector -->
+    <label for="sizeSelect">Size</label>
+    <select id="sizeSelect" aria-label="Specimen size">
+      <option value="18">18px</option>
+      <option value="24">24px</option>
+      <option value="32" selected>32px</option>
+      <option value="48">48px</option>
+      <option value="72">72px</option>
+    </select>
+
+  </div>
+
+  <div class="testing-area">
+    <div id="specimen"
+         class="specimen-editable"
+         contenteditable="true"
+         aria-label="Type test area (editable)">ಉಳ್ಳವರು ಶಿವಾಲಯವ ಮಾಡುವರು !<br/>ನಾನೇನ ಮಾಡುವೆ ? ಬಡವನಯ್ಯ!<br />ಎನ್ನ ಕಾಲೇ ಕಂಬ, ದೇಹವೇ ದೇಗುಲ,<br />ಶಿರವೇ ಹೊನ್ನ ಕಳಶವಯ್ಯ!<br />ಕೂಡಲಸಂಗಮದೇವ ಕೇಳಯ್ಯ,<br />ಸ್ಥಾವರಕ್ಕಳಿವುಂಟು, ಜಂಗಮಕ್ಕಳಿವಿಲ್ಲ!<br /><br />Those who have money build temples to Shiva.<br />What can a poor man like me build?<br />My legs are pillars, my body is the shrine,<br />My head is the golden pinnacle!<br /><br />ನೀವು ಇಲ್ಲಿ ಬರೆಯಬಹುದು......<br />You Can Type Here......</div></div>
+</section>
+
+
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero-title">SriRaju Kannada Font</h1>
+      <p class="hero-sub">a Kannada typeface designed by Nagalingappa Badiger. Published by Sugata Srinivasaraju.</p>
+          <section class="font-credits" aria-labelledby="creditsHeading">
+            <h2 id="creditsHeading">Credits &amp; Font Information</h2>
+            <ul class="credits-inline">
+            <li><strong>Font name:</strong> Sriraju</li>
+            <li><strong>Scripts supported:</strong> Kannada, Latin</li>
+            <li><strong>Project by:</strong> <a href="https://sugataraju.blogspot.com/" target="_blank" rel="noopener">Sugata Srinivasaraju</a></li>
+            <li><strong>Typeface designer:</strong> Nagalingappa Badiger</li>
+            <li><strong>Maintainer:</strong> <a href="/about/">Arun c Kallappanavar</a> </li>
+            <li><strong>Styles / Weights:</strong> Regular, Regular Italic, Bold, Bold Italic, Outline, Outline Italic</li>
+          </section>
+
+        <div class="hero-actions">
+
+    </section>
+  </main>
+
+<div id="site-footer"></div>
+
+  <!-- scripts -->
+  <script src="/js/main.js" defer></script>
+  <script src="/js/sriraju.js" defer></script>
+</body>
+</html>
