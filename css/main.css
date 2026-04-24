@@ -338,7 +338,7 @@ code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-si
 /* specimen-name variations */
 .specimen-name{
   display:inline-block;
-  font-size:4rem;
+  font-size:3rem;
   line-height:1;
   font-weight:600;
   margin-bottom:.25rem;
@@ -351,6 +351,7 @@ code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-si
 .specimen-name.Karnata-GTN{ font-family: "Karnata-GTN", ui-monospace, Menlo, monospace; font-weight:400; }
 .specimen-name.sriraju{ font-family: "SRIRAJUB", ui-monospace, Menlo, monospace; font-weight:400; }
 .specimen-name.Karnata-Wesleyan{ font-family: "Karnata-Wesleyan", ui-monospace, Menlo, monospace; font-weight:400; }
+.specimen-name.Karnata-German{ font-family: "Karnata-German", ui-monospace, Menlo, monospace; font-weight:400; }
 
 /* Description clickable */
 .font-desc{ margin:.25rem 0 .5rem; color:var(--muted); font-size:.97rem; }
@@ -378,3 +379,15 @@ code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-si
   padding-bottom: 8px;
   color: var(--muted);
 }
+
+/* Local webfonts */
+@font-face{ font-family: "anchu"; src: url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face{ font-family: "Karnata-GTN"; src: url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face{ font-family: "SRIRAJBI"; src: url("/assets/sriraju/SRIRAJBI.ttf") format("truetype"); font-display: swap; }
+@font-face{ font-family: "SRIRAJUB"; src: url("/assets/sriraju/SRIRAJUB.ttf") format("truetype"); font-display: swap; }
+@font-face{ font-family: "SRIRAJUI"; src: url("/assets/sriraju/SRIRAJUI.ttf") format("truetype"); font-display: swap; }
+@font-face{ font-family: "SRIRAJUO"; src: url("/assets/sriraju/SRIRAJUO.ttf") format("truetype"); font-display: swap; }
+@font-face{ font-family: "SRIRAJUR"; src: url("/assets/sriraju/SRIRAJUR.ttf") format("truetype"); font-display: swap; }
+@font-face{ font-family: "SRIRAJOI"; src: url("/assets/sriraju/SRIRAUOI.ttf") format("truetype"); font-display: swap; }
+@font-face{ font-family: "Karnata-Wesleyan"; src: url("/assets/fonts/KarnataWesleyanMissionPress.otf") format("opentype"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face{ font-family: "Karnata-German"; src: url("/assets/fonts/KarnataGermanMissionPressTypeface.otf") format("opentype"); font-weight: 400 900; font-style: normal; font-display: swap; }
