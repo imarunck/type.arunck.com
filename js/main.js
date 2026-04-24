@@ -5,6 +5,36 @@ document.addEventListener('DOMContentLoaded', function () {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Fonts list interactions (home page)
+  function bindClickable(selector){
+    const els = document.querySelectorAll(selector);
+    els.forEach(el => {
+      const target = el.dataset.target || el.closest('.font-item')?.dataset.href;
+      if (!target) return;
+      el.addEventListener('click', function (e) {
+        if (e.ctrlKey || e.metaKey) {
+          window.open(target, '_blank');
+        } else {
+          window.location.href = target;
+        }
+      });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (e.ctrlKey || e.metaKey) {
+            window.open(target, '_blank');
+          } else {
+            window.location.href = target;
+          }
+        }
+      });
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    });
+  }
+
+  bindClickable('.font-name');
+  bindClickable('.font-desc.clickable');
+
   // Mobile nav toggle
   const navToggle = document.getElementById('nav-toggle');
   const navList = document.getElementById('nav-list');

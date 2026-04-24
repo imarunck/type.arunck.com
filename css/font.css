@@ -1,0 +1,117 @@
+/* font.css - shared styles for all single-font pages
+   Depends on variables + base components from /css/main.css */
+
+:root{
+  --specimen-max-width: 980px;
+}
+
+/* Hero tweaks */
+.hero{ padding:1.5rem 0 0.75rem; }
+.hero-title{ color:var(--brand); font-size:2rem; }
+.hero-actions{ margin-top:.75rem; display:flex; gap:.6rem; flex-wrap:wrap; }
+
+/* Big name */
+.big-name{ margin-top:1rem; display:flex; flex-direction:column; gap:.6rem; align-items:flex-start; }
+.name-display{
+  font-size:7.5rem;
+  line-height:0.9;
+  letter-spacing:-0.02em;
+  color:var(--brand);
+  margin:0;
+}
+
+/* Default families (overridden by [data-font] selectors below) */
+.name-display,
+.specimen-editable{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Testing area */
+.type-testing{ margin-top:1rem; }
+.controls{ display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:.5rem; }
+.controls label{ font-size:.95rem; color:var(--text); }
+.controls select, .controls input[type="range"]{ font-family:var(--ui); }
+
+/* Editable specimen area */
+.testing-area{ margin-top:.5rem; display:flex; flex-direction:column; gap:.5rem; }
+.specimen-editable{
+  width:100%;
+  max-width:var(--specimen-max-width);
+  min-height:200px;
+  padding:1rem;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:var(--typebox);
+  box-shadow:0 2px 8px rgba(0,0,0,0.02);
+  outline:none;
+  white-space:pre-wrap;
+  overflow:auto;
+  font-size:48px;
+  line-height:1.45;
+}
+.specimen-editable:focus{
+  box-shadow:0 0 0 4px rgba(175,28,46,0.06);
+  border-color:rgba(175,28,46,0.12);
+}
+
+/* Prevent layout shift for weight value */
+#weightVal{
+  display:inline-block;
+  min-width:3ch;
+  text-align:right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Play button: hidden by default, enabled for variable fonts */
+#playWeight{
+  display:none;
+  padding:.35rem .6rem;
+  font-size:.9rem;
+  border-radius:6px;
+  border:1px solid rgba(0,0,0,0.12);
+  background:transparent;
+  cursor:pointer;
+  font-weight:600;
+  color:var(--brand);
+}
+body[data-variable="true"] #playWeight{ display:inline-flex; align-items:center; gap:.35rem; }
+#playWeight.playing{ color:var(--text); }
+
+/* Credits block (used by some pages) */
+.font-credits{ margin:0 0; max-width:760px; }
+.font-credits h2{ font-size:1.1rem; margin-bottom:.75rem; color:var(--brand); }
+.credits-inline{ list-style:none; padding:0; margin:0; }
+.credits-inline li{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:.5rem;
+  margin:.35rem 0;
+  color:var(--muted);
+  line-height:1.5;
+}
+.credits-inline strong{ color:var(--text); font-weight:600; }
+.credits-inline a{ color:var(--brand); text-decoration:none; }
+.credits-inline a:hover{ text-decoration:underline; }
+
+/* Font-specific family bindings */
+body[data-font="anchu"] .name-display,
+body[data-font="anchu"] .specimen-editable{
+  font-family: "anchu", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body[data-font="karnata-gtn"] .name-display,
+body[data-font="karnata-gtn"] .specimen-editable{
+  font-family: "Karnata-GTN", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body[data-font="sriraju"] .name-display,
+body[data-font="sriraju"] .specimen-editable{
+  font-family: "SRIRAJUB", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Responsive */
+@media (max-width:720px){
+  .name-display{ font-size:3rem; }
+  .specimen-editable{ font-size:20px; }
+}
+

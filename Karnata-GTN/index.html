@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="kn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Type By Arun CK</title>
+  <meta name="description" content="Karnata-GTN — a text-first Kannada typeface by Arun CK. Specimens, downloads, and testing tool." />
+  <link rel="icon" href="/favicon.ico" />
+
+ <!-- Lexend & IBM Plex Sans (UI) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Shared + page styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font.css">
+
+  <style>
+    @font-face{
+      font-family: "anchu";
+      src: url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face{
+      font-family: "Karnata-GTN";
+      src: url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+</head>
+<body class="page-font" data-font="karnata-gtn" data-variable="true">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <a href="/" class="logo" aria-label="Type by Arun CK">type<span class="dot">.arunck.com</span></a>
+        <p class="tagline">The digital shelf of everything I create in typeface design.</p>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+          ☰
+        </button>
+        <ul id="nav-list" class="nav-list">
+          <li><a href="/">Fonts</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+      </nav>
+    </div>
+    <hr class="divider">
+  </header>
+
+  <main id="main" class="wrap main-content" role="main">
+
+    <section class="hero">
+      <h1 class="hero-title">Karnata-GTN Kannada Font</h1>
+      <p class="hero-sub">A Variable script font for Kannada + Latin.</p>
+
+      <div class="hero-actions">
+        <a class="btn primary" id="downloadBtn" href="https://github.com/sanchaya/karnata-gtn-font/releases/download/Beta/KarnataGTN.Font.Family.Beta.2.0.zip" rel="noopener" download>Download</a>
+        <a class="btn ghost" href="/">See other fonts</a>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section class="big-name">
+      <div class="name-display" id="nameDisplay" aria-hidden="true">ಕರ್ನಾಟ ಜಿ ಟಿ ಎನ್</div>
+    </section>
+
+    <hr class="divider">
+
+    <section class="type-testing" aria-labelledby="testingHeading">
+      <h2 id="testingHeading">Type testing -Type below to preview text</h2>
+
+      <div class="controls">
+        <label for="weightPreset">Weight preset</label>
+        <select id="weightPreset" aria-label="Weight preset">
+          <option value="400">Regular (400)</option>
+          <option value="500">Medium (500)</option>
+          <option value="600">SemiBold (600)</option>
+          <option value="700">Bold (700)</option>
+          <option value="800">ExtraBold (800)</option>
+          <option value="900">Black (900)</option>
+        </select>
+
+        <label for="weightRange">
+          Weight <output id="weightVal">400</output>
+        </label>
+        <input id="weightRange" type="range" min="400" max="900" step="1" value="400" />
+
+        <label for="sizeSelect">Size</label>
+        <select id="sizeSelect" aria-label="Specimen size">
+          <option value="18">18px</option>
+          <option value="24">24px</option>
+          <option value="32" selected>32px</option>
+          <option value="48">48px</option>
+          <option value="72">72px</option>
+        </select>
+
+        <button id="playWeight" type="button" aria-label="Animate weight axis">
+         ▶ Play
+        </button>
+      </div>
+
+      <div class="testing-area">
+        <div id="specimen"
+             class="specimen-editable"
+             contenteditable="true"
+             aria-label="Type test area (editable)">ಉಳ್ಳವರು ಶಿವಾಲಯವ ಮಾಡುವರು !<br />ನಾನೇನ ಮಾಡುವೆ ? ಬಡವನಯ್ಯ!<br />ಎನ್ನ ಕಾಲೇ ಕಂಬ, ದೇಹವೇ ದೇಗುಲ,<br />ಶಿರವೇ ಹೊನ್ನ ಕಳಶವಯ್ಯ!<br />ಕೂಡಲಸಂಗಮದೇವ ಕೇಳಯ್ಯ,<br />ಸ್ಥಾವರಕ್ಕಳಿವುಂಟು, ಜಂಗಮಕ್ಕಳಿವಿಲ್ಲ!<br /><br />Those who have money build temples to Shiva.<br />What can a poor man like me build?<br />My legs are pillars, my body is the shrine,<br />My head is the golden pinnacle!<br />Hear me, O Lord Kudalasangama,<br />There is destruction for what stands,<br />But not for what moves!<br/><br/>ನೀವು ಇಲ್ಲಿ ಬರೆಯಬಹುದು......<br/>You Can Type Here......</div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section class="font-credits" aria-labelledby="creditsHeading">
+      <h2 id="creditsHeading">Credits &amp; Font Information</h2>
+      <ul class="credits-inline">
+        <li><strong>Font name:</strong> Karnata-GTN</li>
+        <li><strong>Scripts supported:</strong> Kannada, Latin</li>
+        <li><strong>Project by:</strong> <a href="https://sanchaya.org" target="_blank" rel="noopener">Sanchaya.org</a></li>
+        <li><strong>Typeface designer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
+        <li><strong>Font technology:</strong> Variable Font (wght axis)</li>
+        <li><strong>Styles / Weights:</strong> Regular, Medium, SemiBold, Bold, ExtraBold, Black (400–900)</li>
+        <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank" rel="noopener">SIL Open Font License (OFL)</a></li>
+      </ul>
+    </section>
+  </main>
+
+<div id="site-footer"></div>
+
+  <script src="/js/main.js" defer></script>
+  <script src="/js/Karnata-GTN.js" defer></script>
+</body>
+</html>

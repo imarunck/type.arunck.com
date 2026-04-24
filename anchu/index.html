@@ -14,25 +14,23 @@
 
   <!-- Shared + page styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/anchu.css">
+  <link rel="stylesheet" href="/css/font.css">
 
-  <!-- Local Anchu webfont - adjust file names if yours differ -->
+  <!-- Local Anchu webfont -->
   <style>
     @font-face{
       font-family: "anchu";
-      src: url("assets/fonts/Anchu-Kannada-Regular.woff") format("woff"),
-           url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
+      src: url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
     }
   </style>
 </head>
-<body class="page-anchu">
+<body class="page-font" data-font="anchu" data-variable="false">
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Header (same as other pages) -->
   <header class="site-header">
     <div class="wrap header-inner">
       <div class="brand">
@@ -41,11 +39,11 @@
       </div>
 
       <nav class="site-nav" aria-label="Primary">
-        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+          ☰
+        </button>
         <ul id="nav-list" class="nav-list">
-          <li><a href="/">Home</a></li>
-          <li><a href="/fonts/">Fonts</a></li>
-          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/">Fonts</a></li>
           <li><a href="/about/">About</a></li>
         </ul>
       </nav>
@@ -54,80 +52,39 @@
   </header>
 
   <main id="main" class="wrap main-content" role="main">
-    <!-- Hero -->
     <section class="hero">
-      <!-- Title in site theme only (not rendered in anchu) -->
       <h1 class="hero-title">Anchu Kannada Font</h1>
-      <p class="hero-sub">A compact, legible Kannada text family for UI & print.</p>
+      <p class="hero-sub">A compact, legible Kannada text family for UI &amp; print.</p>
 
       <div class="hero-actions">
-        <!-- Replace href with your high-speed download link -->
         <a class="btn primary" id="downloadBtn" href="https://github.com/imarunck/Anchu/releases/download/Releases/Anchu-Kannada-Regular.zip" rel="noopener" download>Download</a>
-        <a class="btn ghost" href="/fonts/">See other fonts</a>
+        <a class="btn ghost" href="/">See other fonts</a>
       </div>
     </section>
 
     <hr class="divider">
 
-    <!-- Big name in its own style -->
     <section class="big-name">
-      <!-- This renders the font name using the anchu face -->
       <div class="name-display" id="nameDisplay" aria-hidden="true">ಅಂಚು</div>
-    <!--<p class="two-line-desc">Optimized for on-screen reading at small sizes. Balances compact counters with open shapes for clear line color.</p>-->
     </section>
 
     <hr class="divider">
 
-          <h2 id="testingHeading">Type testing -Type below to preview text</h2>
-
-
-    <!-- Type testing 
     <section class="type-testing" aria-labelledby="testingHeading">
-      <h2 id="testingHeading">Type testing</h2>
-
-      <div class="controls">
-        <label for="weightRange">Weight <output id="weightVal">400</output></label>
-        <input id="weightRange" type="range" min="200" max="800" step="1" value="400" />
-
-        <label for="sizeSelect">Size</label>
-        <select id="sizeSelect" aria-label="Specimen size">
-          <option value="18">18px</option>
-          <option value="24">24px</option>
-          <option value="32">32px</option>
-          <option value="48" selected>48px</option>
-          <option value="72">72px</option>
-        </select>
-      </div>  -->
+      <h2 id="testingHeading">Type testing -Type below to preview text</h2>
 
       <div class="testing-area">
-      <!--<label for="specimen" class="visually-hidden">Editable specimen text</label>-->
         <div id="specimen"
              class="specimen-editable"
              contenteditable="true"
              aria-label="Type test area (editable)">ನುಡಿದರೆ ಮುತ್ತಿನ ಹಾರದಂತಿರಬೇಕು!</br>ನುಡಿದರೆ ಮಾಣಿಕ್ಯದ ದೀಪ್ತಿಯಂತಿರಬೇಕು!</br>ನುಡಿದರೆ ಸ್ಫಟಿಕದ ಶಲಾಕೆಯಂತಿರಬೇಕು!</br>ನುಡಿದರೆ ಲಿಂಗ ಮೆಚ್ಚಿ ಅಹುದೆನಬೇಕು!</br>ನುಡಿದರೆ ಗಂಗೆಯ ನೀರಿನಂತಿರಬೇಕು!</br>ನುಡಿದರೆ ಮಧುರವಾದ ಮಧುವಂತಿರಬೇಕು!</br>ನುಡಿದರೆ ನುಡಿಯೊಳಗಾಗಿ ನಡೆಯದಿದ್ದರೆ</br>ಕೂಡಲಸಂಗಮದೇವನೆಂತೊಲಿವನಯ್ಯ ?</div>
-
-        <!-- <div class="specimen-help muted">
-          Tip: paste your own text into the box above. Use the weight slider to test variable font axis. If the variable font is unavailable the slider will attempt a font-weight fallback.
-        </div> -->
       </div>
     </section>
-
-    <!-- Technical & usage hints 
-    <section class="tech">
-      <h2>Usage notes</h2>
-      <ul>
-        <li>Recommended line-height: 1.4 for body text at 16–20px.</li>
-        <li>CSS stack: <code>'anchu', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;</code></li>
-        <li>OpenType features: <code>ccmp</code>, <code>locl(kn)</code>, <code>mark</code>, <code>mkmk</code>.</li>
-      </ul>
-    </section> -->
 
   </main>
 
 <div id="site-footer"></div>
 
-
-  <!-- scripts -->
   <script src="/js/main.js" defer></script>
   <script src="/js/anchu.js" defer></script>
 </body>

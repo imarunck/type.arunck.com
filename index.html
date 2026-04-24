@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Type By Arun CK</title>
-  <meta name="description" content="Arun CK - type designer. Specimens, open-source Kannada fonts, download & usage notes." />
+  <title>Kannada Fonts By Arun CK</title>
+  <meta name="description" content="A curated list of fonts by Arun CK — Anchu Kannada and more." />
   <link rel="icon" href="/favicon.ico" />
 
   <!-- Lexend & IBM Plex Sans (UI) -->
@@ -12,36 +12,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Local webfonts (example Anchu, optional) -->
- <style>
+  <!-- Page + shared styles -->
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Local webfonts -->
+  <style>
     @font-face{
       font-family: "anchu";
-      src: url("assets/fonts/Anchu-Kannada-Regular.woff") format("woff"),
-           url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
+      src: url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
     }
- </style>
 
-  <style>
     @font-face{
       font-family: "Karnata-GTN";
-      src: url("assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype"),
-           url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      src: url("/assets/fonts/KarnataGTN-VariableFont.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+        @font-face{
+      font-family: "SRIRAJUB";
+      src: url("/assets/sriraju/SRIRAJUB.ttf") format("truetype");
+      font-style: normal;
+      font-display: swap;
+    }
+
+      @font-face{
+      font-family: "Karnata-Wesleyan";
+      src: url("/assets/fonts/KarnataWesleyanMissionPress.otf") format("opentype");
       font-weight: 400 900;
       font-style: normal;
       font-display: swap;
     }
   </style>
 
-
-
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/fonts.css">
-
 </head>
-<body class="page-root">
+<body class="page-fonts">
 
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -57,9 +66,7 @@
           ☰
         </button>
         <ul id="nav-list" class="nav-list">
-          <li><a href="/" aria-current="page">Home</a></li>
-          <li><a href="/fonts/">Fonts</a></li>
-          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/" aria-current="page">Fonts</a></li>
           <li><a href="/about/">About</a></li>
         </ul>
       </nav>
@@ -69,46 +76,27 @@
 
   <main id="main" class="wrap main-content" role="main">
 
-    <section class="hero">
-      <h1 class="hero-title">Featured <span class="ack">Works</span></h1>
-    <!--<p class="hero-sub">Catalog of released families and upcoming releases. Click any item to view specimen, technical notes and downloads.</p>-->
-    </section>
-    <!-- Released fonts (no section title as requested) -->
-     <section class="fonts-list" aria-label="Released fonts">
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-title">Type by <span class="ack">Arun CK</span></h1>
+  </section>
 
-          <!-- Font item: Karnata-GTN 
-      <a href="/fonts/Karnata-GTN/" class="font-item-link">
-      <article class="font-item">
-        <div class="font-left">
-          <span class="font-name">
-            <span class="specimen-name Karnata-GTN">ಕರ್ನಾಟ ಜಿ ಟಿ ಎನ್</span>
-          </span>
-          <p class="font-desc">
-            A Variable script font for Kannada + Latin.
-          </p>
-          <div class="font-meta">
-            <span class="badge">Variable</span>
-            <span class="badge">Kannada</span>
-            <span class="badge">sanchaya.org</span>
-          </div>
-        </div>
+  <!-- Released -->
+  <section class="fonts-list" aria-label="Released fonts">
 
-        <div class="font-right">
-            <span class="btn ghost">View</span>
-        </div>
-      </article>
-      </a> -->
 
-            <!-- Font item: Anchu Kannada (released) -->
-      <a href="/fonts/anchu/" class="font-item-link">
+    <a href="/anchu/" class="font-item-link">
       <article class="font-item">
         <div class="font-left">
           <span class="font-name">
             <span class="specimen-name anchu">ಅಂಚು ಕನ್ನಡ ಫಾಂಟ್</span>
           </span>
+
           <p class="font-desc">
-            A monospace companion for editorial and code-like layouts — compact, readable glyphs for Kannada + Latin.
+            A monospace companion for editorial and code-like layouts —
+            compact, readable glyphs for Kannada + Latin.
           </p>
+
           <div class="font-meta">
             <span class="badge">Kannada</span>
             <span class="badge">Bitmap</span>
@@ -117,25 +105,62 @@
         </div>
 
         <div class="font-right">
-            <span class="btn ghost">View</span>
+          <span class="btn ghost">View</span>
         </div>
       </article>
-      </a>
+    </a>
 
-    </section>
+    <a href="/sriraju/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name sriraju">ಶ್ರೀರಾಜು ಕನ್ನಡ ಫಾಂಟ್</span>
+          </span>
 
-      <div class="hero-ctas">
-        <a class="btn primary home" href="/fonts/">Explore More fonts</a>
-      </div>
+          <p class="font-desc">a Kannada typeface designed by Nagalingappa Badiger. Published by Sugata Srinivasaraju.</p>
+
+          <div class="font-meta">
+            <span class="badge">Outline</span>
+            <span class="badge">Kannada</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+          <span class="btn ghost">View</span>
+        </div>
+      </article>
+    </a>
+
+    <a href="/Karnata-GTN/" class="font-item-link">
+      <article class="font-item">
+        <div class="font-left">
+          <span class="font-name">
+            <span class="specimen-name Karnata-GTN">ಕರ್ನಾಟ ಜಿ ಟಿ ಎನ್</span>
+          </span>
+
+          <p class="font-desc">
+            A Variable script font for Kannada + Latin.
+          </p>
+
+          <div class="font-meta">
+            <span class="badge">Variable</span>
+            <span class="badge">Kannada</span>
+            <span class="badge">sanchaya.org</span>
+          </div>
+        </div>
+
+        <div class="font-right">
+          <span class="btn ghost">View</span>
+        </div>
+      </article>
+    </a>
 
 
-    <!-- Contact / CTA
-    <section class="contact-cta">
-      <h2>Contact</h2>
-      <p>Want to collaborate ? Email me at <a href="mailto:info@arunck.com">info@arunck.com</a></p>
-    </section>    -->
+    
 
-<!--run git bash "node scripts/generate-sitemap.js" --domain=https://type.arunck.com -->
+
+
+  </section>
 
   </main>
 <div id="site-footer"></div>
