@@ -306,7 +306,7 @@ code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-si
 }
 
 /* Fonts list area */
-.fonts-list{ display:flex; flex-direction:column; gap:1rem; margin-top:1rem; margin-bottom:1rem; }
+.fonts-list{ display:flex; flex-direction:column; gap:2rem; margin-top:1rem; margin-bottom:1rem; }
 .font-item{
   display:flex;
   align-items:center;
