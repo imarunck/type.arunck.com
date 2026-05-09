@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // Fonts list interactions (home page)
-  function bindClickable(selector){
+  function bindClickable(selector) {
     const els = document.querySelectorAll(selector);
     els.forEach(el => {
       const target = el.dataset.target || el.closest('.font-item')?.dataset.href;
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // If variable font is installed (GTN), use 'font-variation-settings'
     specimen.style.fontVariationSettings = `"wght" ${w}`;
     // Fallback for non-variable fonts: adjust font-weight property
-    specimen.style.fontWeight = Math.round((w/100));
+    specimen.style.fontWeight = Math.round((w / 100));
   }
 
   if (weightRange && specimen) {
@@ -74,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
       navToggle.setAttribute('aria-expanded', 'false');
     }
   });
+
+
 
 });
 
