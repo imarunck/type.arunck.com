@@ -26,6 +26,12 @@
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
+/* Font faces */
+@font-face {
+  font-family: "Karnata-Bandipur";
+  src: url("/assets/fonts/KarnataBandipur.otf") format("opentype");
+}
+
 /* Testing area */
 .type-testing{ margin-top:1rem; }
 .controls{ display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:.5rem; }
@@ -107,6 +113,21 @@ body[data-font="karnata-gtn"] .specimen-editable{
 body[data-font="sriraju"] .name-display,
 body[data-font="sriraju"] .specimen-editable{
   font-family: "SRIRAJUB", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body[data-font="karnata-german"] .name-display,
+body[data-font="karnata-german"] .specimen-editable{
+  font-family: "Karnata-German", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body[data-font="karnata-wesleyan"] .name-display,
+body[data-font="karnata-wesleyan"] .specimen-editable{
+  font-family: "Karnata-Wesleyan", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body[data-font="karnata-bandipur"] .name-display,
+body[data-font="karnata-bandipur"] .specimen-editable{
+  font-family: "Karnata-Bandipur", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 /* Responsive */

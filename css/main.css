@@ -352,6 +352,8 @@ code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-si
 .specimen-name.sriraju{ font-family: "SRIRAJUB", ui-monospace, Menlo, monospace; font-weight:400; }
 .specimen-name.Karnata-Wesleyan{ font-family: "Karnata-Wesleyan", ui-monospace, Menlo, monospace; font-weight:400; }
 .specimen-name.Karnata-German{ font-family: "Karnata-German", ui-monospace, Menlo, monospace; font-weight:400; }
+.specimen-name.Karnata-Bandipur{ font-family: "Karnata-Bandipur", ui-monospace, Menlo, monospace; font-weight:400; }
+
 
 /* Description clickable */
 .font-desc{ margin:.25rem 0 .5rem; color:var(--muted); font-size:.97rem; }
@@ -391,3 +393,4 @@ code{ font-family: var(--mono); padding:.1rem .25rem; border-radius:4px; font-si
 @font-face{ font-family: "SRIRAJOI"; src: url("/assets/sriraju/SRIRAUOI.ttf") format("truetype"); font-display: swap; }
 @font-face{ font-family: "Karnata-Wesleyan"; src: url("/assets/fonts/KarnataWesleyanMissionPress.otf") format("opentype"); font-weight: 400 900; font-style: normal; font-display: swap; }
 @font-face{ font-family: "Karnata-German"; src: url("/assets/fonts/KarnataGermanMissionPressTypeface.otf") format("opentype"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face{ font-family: "Karnata-Bandipur"; src: url("/assets/fonts/KarnataBandipur.otf") format("opentype"); font-weight: 400 900; font-style: normal; font-display: swap; }
