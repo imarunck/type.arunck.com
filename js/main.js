@@ -1,7 +1,7 @@
-// main.js - small UI interactions for the index page
+// main.js - small UI interactions for pages
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Set copyright year
+  // Set copyright year if the footer loads immediately.
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -35,26 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
   bindClickable('.font-name');
   bindClickable('.font-desc.clickable');
 
-  // Mobile nav toggle
-  const navToggle = document.getElementById('nav-toggle');
-  const navList = document.getElementById('nav-list');
-  if (navToggle && navList) {
-    navToggle.addEventListener('click', function () {
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', String(!expanded));
-      navList.style.display = expanded ? 'none' : 'flex';
-    });
-  }
-
   // Variable-weight demo (if variable is available)
   const weightRange = document.getElementById('weightRange');
   const specimen = document.getElementById('specimenText');
 
   function setSpecimenWeight(w) {
     if (!specimen) return;
-    // If variable font is installed (GTN), use 'font-variation-settings'
     specimen.style.fontVariationSettings = `"wght" ${w}`;
-    // Fallback for non-variable fonts: adjust font-weight property
     specimen.style.fontWeight = Math.round((w / 100));
   }
 
@@ -63,29 +50,44 @@ document.addEventListener('DOMContentLoaded', function () {
     weightRange.addEventListener('input', function () { setSpecimenWeight(this.value); });
   }
 
-  // Navigation logic remains visible on mobile, no hamburger menu needed.
-
-
-
-});
-
-const navLinks = document.querySelectorAll('.nav-list a');
-
-navLinks.forEach(link => {
-  const linkHref = link.getAttribute('href');
-  if (linkHref !== '/' && window.location.pathname.startsWith(linkHref)) {
-    link.setAttribute('aria-current', 'page');
-  }
-});
-
-
-fetch("/partials/footer.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("site-footer").innerHTML = html;
-
-    // update year
-    const y = document.getElementById("year");
+  loadPartial('/partials/header.html', 'site-header', initHeader);
+  loadPartial('/partials/footer.html', 'site-footer', function () {
+    const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
-  })
-  .catch(err => console.error("Footer load failed:", err));
+  });
+});
+
+function loadPartial(url, elementId, callback) {
+  fetch(url)
+    .then(res => res.text())
+    .then(html => {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.innerHTML = html;
+      if (callback) callback();
+    })
+    .catch(err => console.error(`${elementId} load failed:`, err));
+}
+
+function initHeader() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navList = document.getElementById('nav-list');
+
+  if (navToggle && navList) {
+    navToggle.addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      navList.style.display = expanded ? 'none' : 'flex';
+    });
+  }
+
+  const navLinks = document.querySelectorAll('.nav-list a');
+  navLinks.forEach(link => {
+    const linkHref = link.getAttribute('href');
+    if (linkHref === '/' && window.location.pathname === '/') {
+      link.setAttribute('aria-current', 'page');
+    } else if (linkHref !== '/' && window.location.pathname.startsWith(linkHref)) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+}
