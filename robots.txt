@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://type.arunck.com/sitemap.xml

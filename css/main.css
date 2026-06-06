@@ -150,6 +150,8 @@ a:active {
 .hero{ padding:1.25rem 0 0 0; display:grid; align-items:center; gap:.2rem; }
 .hero-title{ margin:0; font-size:2rem; font-weight: 600; color:var(--brand); line-height:1.08; }
 .hero-sub{ margin:.5rem 0 0.5rem; color:var(--muted) }
+.hero-intro{ display:none; }
+.fonts-list-intro{ display:none; }
 .hero-ctas{ display:flex; gap:.75rem; flex-wrap:wrap; }
 
 /* Buttons */
@@ -173,6 +175,7 @@ a:active {
 
 /* Grid */
 .grid{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem; }
+.related-fonts{ margin-top:.5rem; color:var(--muted); font-size:0.95rem; }
 .grid.three .card{ flex:1 1 calc(33.333% - 1rem); min-width:240px; }
 
 /* Card */
@@ -208,10 +211,12 @@ a:active {
 }
 @media (max-width:640px){
   .grid.three .card{ flex:1 1 100% }
-  .site-nav .nav-list{ display:none; position:absolute; right:1rem; top:68px; background:#fff; box-shadow:0 8px 20px rgba(0,0,0,0.06); padding:0.6rem; border-radius:8px; flex-direction:column; min-width:160px; }
-  .nav-toggle{ display:block }
-  .header-inner{ align-items:flex-start }
-  .brand .tagline{ display:none }
+  .site-nav{ width:100%; justify-content:flex-start; }
+  .site-nav .nav-list{ display:flex; position:static; right:auto; top:auto; background:transparent; box-shadow:none; padding:0; border-radius:0; flex-direction:row; flex-wrap:wrap; gap:0.75rem; min-width:auto; }
+  .header-inner{ align-items:flex-start; flex-wrap:wrap; gap:0.75rem; }
+  .hero .hero-title{display:none}
+  .hero .hero-sub{display:none}
+
 }
 
 @media (max-width: 768px) {
@@ -228,7 +233,7 @@ a:active {
 
   /* brand area smaller */
   .brand .logo {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     letter-spacing: .03em;
   }
 
@@ -236,36 +241,26 @@ a:active {
     font-size: .85rem;
   }
 
-  /* show hamburger */
   .nav-toggle {
-    display: block;
-    font-size: 1.6rem;
-    padding: .25rem .5rem;
-  }
-
-  /* hide the nav by default */
-  .nav-list {
     display: none;
-    flex-direction: column;
-    gap: .75rem;
-    background: white;
-    width: 100%;
-    padding: 1rem 0;
-    margin-top: .5rem;
-    border-top: 1px solid rgba(0,0,0,0.06);
   }
 
-  /* when nav-open class is applied (via JS) */
-  .nav-list.open {
+  .nav-list {
     display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    background: transparent;
+    width: auto;
+    padding: 0;
+    margin-top: 0;
+    border-top: none;
   }
 
-  /* links smaller & centered */
   .nav-list a {
-    font-size: 1.1rem;
-    text-align: center;
-    padding: .5rem 1rem;
-    width: 100%;
+    font-size: 1.6rem;
+    text-align: left;
+    padding: .25rem .35rem;
+    width: auto;
   }
 
   /* entire header stacked */

@@ -9,6 +9,7 @@
 .hero{ padding:1.5rem 0 0.75rem; }
 .hero-title{ color:var(--brand); font-size:2rem; }
 .hero-actions{ margin-top:.75rem; display:flex; gap:.6rem; flex-wrap:wrap; }
+.hero-actions .btn.download{ margin-left:auto; }
 
 /* Big name */
 .big-name{ margin-top:1rem; display:flex; flex-direction:column; gap:.6rem; align-items:flex-start; }

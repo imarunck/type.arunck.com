@@ -44,8 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
       this.setAttribute('aria-expanded', String(!expanded));
       navList.style.display = expanded ? 'none' : 'flex';
     });
-    // ensure proper initial state on small screens
-    if (window.innerWidth <= 640) navList.style.display = 'none';
   }
 
   // Variable-weight demo (if variable is available)
@@ -65,15 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     weightRange.addEventListener('input', function () { setSpecimenWeight(this.value); });
   }
 
-  // Accessibility: close nav if clicked outside (mobile)
-  document.addEventListener('click', function (e) {
-    if (!navList || !navToggle) return;
-    if (window.innerWidth > 640) return;
-    if (!navList.contains(e.target) && e.target !== navToggle) {
-      navList.style.display = 'none';
-      navToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
+  // Navigation logic remains visible on mobile, no hamburger menu needed.
 
 
 
