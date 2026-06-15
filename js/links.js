@@ -1,6 +1,6 @@
 // Replace placeholders below with direct ZIP/download links for each font.
 window.fontLinks = {
-  gtn: "https://github.com/sanchaya/karnata-gtn-typeface/releases/download/release/karnata-gtn-typeface-release-1.0.zip",
+  gtn: "https://github.com/sanchaya/karnata-gtn-typeface/releases/download/1-5-00-GTN/KarnataGTN.1-5-00.zip",
   wesleyan: "https://github.com/sanchaya/karnata-wesleyan-mission-press-typeface/releases/download/Version_2.5/KarnataWesleyanMissionPress-Version.2.5.zip",
   german: "https://github.com/sanchaya/karnata-german-mission-press-typeface/releases/download/Release_1.5/karnata-german-mission-press-typeface-1.5.zip",
   bandipur: "https://github.com/sanchaya/karnata-bandipur/releases/download/3.0/KarnataBandipur3.0.zip",
