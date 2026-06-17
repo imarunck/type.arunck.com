@@ -58,11 +58,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loadPartial(url, elementId, callback) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  if (el.innerHTML.trim()) {
+    if (callback) callback();
+    return;
+  }
+
   fetch(url)
     .then(res => res.text())
     .then(html => {
-      const el = document.getElementById(elementId);
-      if (!el) return;
       el.innerHTML = html;
       if (callback) callback();
     })

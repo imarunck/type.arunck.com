@@ -31,6 +31,16 @@
 <body class="page-font" data-font="anchu" data-variable="false">
 
   <div id="site-header"></div>
+  <script>
+    (function () {
+      const headerContainer = document.getElementById('site-header');
+      if (!headerContainer) return;
+      fetch('/partials/header.html')
+        .then(res => res.text())
+        .then(html => { headerContainer.innerHTML = html; })
+        .catch(err => console.error('Header load failed:', err));
+    })();
+  </script>
 
   <main id="main" class="wrap main-content" role="main">
     <section class="hero">
@@ -53,7 +63,7 @@
     <hr class="divider">
 
     <section class="type-testing" aria-labelledby="testingHeading">
-      <h2 id="testingHeading">Type testing -Type below to preview text</h2>
+      <h2 id="testingHeading">Type testing — Type below to preview text</h2>
 
       <div class="testing-area">
         <div id="specimen" class="specimen-editable" contenteditable="true" aria-label="Type test area (editable)">
@@ -61,21 +71,41 @@
       </div>
     </section>
 
+    <hr class="divider">
+
+    <section class="font-credits" aria-labelledby="creditsHeading">
+      <h2 id="creditsHeading">Credits &amp; Font Information</h2>
+      <ul class="credits-inline">
+        <li><strong>Font name:</strong> Anchu</li>
+        <li><strong>Scripts supported:</strong> Kannada, Latin</li>
+        <li><strong>Maintainer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
+        <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank" rel="noopener">SIL Open Font License (OFL)</a></li>
+<li><strong>About:</strong> Anchu is an open-source Kannada typeface created as a personal learning project to explore type design, font engineering, Unicode implementation, and OpenType development. Developed through self-study, experimentation, and trial-and-error, the project served as a foundation for understanding how digital fonts are designed, built, and shaped. While Anchu was never intended to be a production-ready typeface, it became an important stepping stone that contributed to the development of later Kannada typefaces, including more refined text, display, and variable font projects. The font remains publicly available as a record of that learning journey and the beginning of a broader exploration into Kannada typography.</li>
+
+<strong>Technical notes:</strong>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: true });
+</script>
+
+<pre class="mermaid">
+flowchart TD
+    A[Interest in Kannada Typography] --> B[Self Learning & Research]
+    B --> C[First Glyph Experiments]
+    C --> D[Font Engineering & Unicode Study]
+    D --> E[OpenType Development]
+    E --> F[Testing & Iteration]
+    F --> G[Anchu Kannada Release]
+</pre>
+      </ul>
+      <p><a href="/" class="btn ghost">See all fonts</a></p>
+      <p class="related-fonts">Related: <a href="/Karnata-GTN/">Karnata-GTN</a> · <a href="/anchu/">Anchu</a></p>
+    </section>
   </main>
 
   <div id="site-footer"></div>
 
-  <section class="font-credits" aria-labelledby="creditsHeading" style="display:none">
-    <h2 id="creditsHeading">Credits &amp; Font Information</h2>
-    <ul class="credits-inline">
-      <li><strong>Font name:</strong> Anchu</li>
-      <li><strong>Scripts supported:</strong> Kannada, Latin</li>
-      <li><strong>Maintainer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
-      <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank" rel="noopener">SIL Open Font License (OFL)</a></li>
-    </ul>
-    <p><a href="/" class="btn ghost">See all fonts</a></p>
-    <p class="related-fonts">Related: <a href="/Karnata-GTN/">Karnata-GTN</a> · <a href="/anchu/">Anchu</a></p>
-  </section>
 
   <script src="/js/main.js" defer></script>
   <script src="/js/links.js" defer></script>

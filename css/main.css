@@ -113,6 +113,12 @@ a:active {
 .skip-link:focus{top:8px}
 
 /* Header */
+#site-header{
+  min-height:5rem;
+}
+@media (max-width: 640px) {
+  #site-header{ min-height:7rem; }
+}
 .site-header{
   background:transparent;
   padding:.5rem 0 .25rem;

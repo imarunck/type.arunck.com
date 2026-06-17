@@ -32,6 +32,16 @@
 <body class="page-font" data-font="sriraju" data-variable="false">
 
   <div id="site-header"></div>
+  <script>
+    (function () {
+      const headerContainer = document.getElementById('site-header');
+      if (!headerContainer) return;
+      fetch('/partials/header.html')
+        .then(res => res.text())
+        .then(html => { headerContainer.innerHTML = html; })
+        .catch(err => console.error('Header load failed:', err));
+    })();
+  </script>
 
   <main id="main" class="wrap main-content" role="main">
 
@@ -96,6 +106,25 @@
         <li><strong>Maintainer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
         <li><strong>Styles / Weights:</strong> Regular, Regular Italic, Bold, Bold Italic, Outline, Outline Italic</li>
         <li><strong>License:</strong> See project repository for license information</li>
+        <li><strong>About:</strong> Sriraju is an open-source Kannada typeface originally designed by Nagalingappa Badiger and published through the efforts of Sugata Srinivasaraju. The project was created to make Kannada typography more accessible, though its distribution and long-term maintenance were not originally organized through a dedicated public repository. With permission from the original authors, the font has been preserved, documented, and published through an open-source workflow to improve accessibility, sustainability, and long-term availability. This effort focuses on maintaining the font, providing downloads, documenting its development, and ensuring that the original creators receive full credit while keeping the typeface available for future users and contributors.</li>
+
+<strong>Technical notes:</strong>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: true });
+</script>
+
+<pre class="mermaid">
+flowchart TD
+    A[Original Sriraju Typeface]
+    --> B[Permission from Authors]
+    --> C[Repository Creation]
+    --> D[Documentation & Organisation]
+    --> E[Public Distribution]
+    --> F[Long-term Maintenance]
+    --> G[Open Source Availability]
+</pre>
       </ul>
       <p><a href="/" class="btn ghost">See all fonts</a></p>
       <p class="related-fonts">Related: <a href="/Karnata-Bandipur/">Karnata Bandipur</a> · <a href="/Karnata-German/">Karnata German</a></p>

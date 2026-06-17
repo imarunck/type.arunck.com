@@ -30,6 +30,16 @@
 <body class="page-font" data-font="karnata-bandipur" data-variable="false">
 
   <div id="site-header"></div>
+  <script>
+    (function () {
+      const headerContainer = document.getElementById('site-header');
+      if (!headerContainer) return;
+      fetch('/partials/header.html')
+        .then(res => res.text())
+        .then(html => { headerContainer.innerHTML = html; })
+        .catch(err => console.error('Header load failed:', err));
+    })();
+  </script>
 
   <main id="main" class="wrap main-content" role="main">
     <section class="hero">
@@ -81,6 +91,36 @@
         <li><strong>Maintainer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
         <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank"
             rel="noopener">SIL Open Font License (OFL)</a></li>
+
+            <li><strong>About:</strong>Karnata Bandipura is an open-source Kannada and Latin display typeface based on the original Bandipur project by John Vargas Beltrán and Priya Ravichandran. As part of the Karnata Font Series by Sanchaya, I re-engineered the typeface to follow modern Kannada font development standards, including Unicode standardization, consistent glyph naming, OpenType feature implementation, and improved font engineering. The goal was to preserve the character of the original design while improving Kannada shaping, technical quality, and usability across print and digital applications.</li>
+
+<strong>Technical notes:</strong>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: true });
+</script>
+
+<pre class="mermaid">
+flowchart TD
+    A[Original Bandipur Typeface] --> B[Project Review & Analysis]
+    B --> C[License Verification]
+    C --> D[Source Font Extraction]
+    D --> E[Import into FontLab]
+    E --> F[Glyph Structure Review]
+    F --> G[Unicode Standardization]
+    G --> H[Adoption of Karnata Font Standards]
+    H --> I[Glyph Naming Normalization]
+    I --> J[OpenType Feature Engineering]
+    J --> K[Kannada Shaping Improvements]
+    K --> L[Font Metrics & Spacing Refinement]
+    L --> M[Production Testing]
+    M --> N[Documentation & Specimen Creation]
+    N --> O[Open Source Release]
+    O --> P[Karnata Font Series Integration]
+</pre>
+
+
       </ul>
       <p><a href="/" class="btn ghost">See all fonts</a></p>
       <p class="related-fonts">Related: <a href="/Karnata-GTN/">Karnata-GTN</a> · <a href="/Karnata-German/">Karnata German</a></p>

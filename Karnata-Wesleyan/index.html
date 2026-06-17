@@ -30,6 +30,16 @@
 <body class="page-font" data-font="karnata-wesleyan" data-variable="false">
 
   <div id="site-header"></div>
+  <script>
+    (function () {
+      const headerContainer = document.getElementById('site-header');
+      if (!headerContainer) return;
+      fetch('/partials/header.html')
+        .then(res => res.text())
+        .then(html => { headerContainer.innerHTML = html; })
+        .catch(err => console.error('Header load failed:', err));
+    })();
+  </script>
 
   <main id="main" class="wrap main-content" role="main">
     <section class="hero">
@@ -82,6 +92,24 @@
         <li><strong>Scripts supported:</strong> Kannada, Latin</li>
         <li><strong>Maintainer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
         <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank" rel="noopener">SIL Open Font License (OFL)</a></li>
+        <li><strong>About:</strong> Karnata Wesleyan Mission Press is an open-source revival typeface based on historical Kannada printing specimens from the Wesleyan Mission Press. Developed as part of the Karnata Font Series by Sanchaya, the project focuses on preserving the visual character of early Kannada letterforms while adapting them for modern digital typography. The typeface was reconstructed from high-quality scans of printed books, digitized, mapped to Unicode standards, and engineered with OpenType support for contemporary use in publishing, research, and digital applications.</li>
+
+<strong>Technical notes:</strong>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: true });
+</script>
+
+<pre class="mermaid">
+flowchart TD
+    A[Historical Wesleyan Press Books] --> B[High Quality Scanning]
+    B --> C[SVG Extraction & Cleanup]
+    C --> D[Glyph Digitisation in FontLab]
+    D --> E[Unicode & OpenType Development]
+    E --> F[Testing & Refinement]
+    F --> G[Karnata Wesleyan Mission Press Release]
+</pre>
       </ul>
       <p><a href="/" class="btn ghost">See all fonts</a></p>
       <p class="related-fonts">Related: <a href="/Karnata-GTN/">Karnata-GTN</a> · <a href="/Karnata-Bandipur/">Karnata Bandipur</a></p>

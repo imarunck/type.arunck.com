@@ -31,6 +31,16 @@
 <body class="page-about">
 
   <div id="site-header"></div>
+  <script>
+    (function () {
+      const headerContainer = document.getElementById('site-header');
+      if (!headerContainer) return;
+      fetch('/partials/header.html')
+        .then(res => res.text())
+        .then(html => { headerContainer.innerHTML = html; })
+        .catch(err => console.error('Header load failed:', err));
+    })();
+  </script>
 
   <main id="main" class="wrap main-content" role="main" aria-labelledby="aboutHeading">
     <section class="hero">
@@ -72,6 +82,7 @@
 
     </section>
 
+</div>
     <!--
             <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/imarunck/" target="_blank"
             rel="noopener">linkedin.com/in/imarunck</a></li>

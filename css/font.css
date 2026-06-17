@@ -29,6 +29,14 @@
 
 /* Font faces */
 @font-face {
+  font-family: "anchu";
+  src: url("/assets/fonts/Anchu-Kannada-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Karnata-Bandipur";
   src: url("/assets/fonts/KarnataBandipur.otf") format("opentype");
 }

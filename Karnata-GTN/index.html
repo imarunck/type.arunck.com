@@ -31,6 +31,16 @@
 <body class="page-font" data-font="karnata-gtn" data-variable="true">
 
   <div id="site-header"></div>
+  <script>
+    (function () {
+      const headerContainer = document.getElementById('site-header');
+      if (!headerContainer) return;
+      fetch('/partials/header.html')
+        .then(res => res.text())
+        .then(html => { headerContainer.innerHTML = html; })
+        .catch(err => console.error('Header load failed:', err));
+    })();
+  </script>
 
   <main id="main" class="wrap main-content" role="main">
 
@@ -104,8 +114,30 @@
         <li><strong>Typeface designer:</strong> <a href="/about/">Arun C Kallappanavar</a></li>
         <li><strong>Font technology:</strong> Variable Font (wght axis)</li>
         <li><strong>Styles / Weights:</strong> Regular, Medium, SemiBold, Bold, ExtraBold, Black (400–900)</li>
-        <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank"
-            rel="noopener">SIL Open Font License (OFL)</a></li>
+        <li><strong>Font license:</strong> <a href="https://openfontlicense.org/documents/OFL.txt" target="_blank"  rel="noopener">SIL Open Font License (OFL)</a></li>
+        <li><strong>About:</strong> Karnata GTN is an open-source variable Kannada typeface inspired by the handwriting of G. T. Narayana Rao. Developed by Arun C Kallappanavar as part of the Sanchaya Initiative, the project transforms handwritten letterforms into a modern digital font while preserving their natural rhythm and personality. Supporting Kannada and Latin scripts with a variable weight axis from 400 to 900, Karnata GTN combines traditional handwriting aesthetics with contemporary typography, making it suitable for web, UI, publishing, branding, and digital communication.</li>
+      <strong>Technical notes:</strong>
+        <script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+  </script>
+        <pre class="mermaid">
+flowchart TD
+    A[Handwritten Source Material] --> B[Research & Analysis]
+    B --> C[Digitization]
+    C --> D[Vector Tracing in Figma]
+    D --> E[Single-Stroke Glyph Construction]
+    E --> F[Custom Glyph Naming]
+    F --> G[Import to FontLab]
+    G --> H[Variable Font Development]
+    H --> I[Master Weight Creation]
+    I --> J[Interpolation Testing]
+    J --> K[Stroke to Outline Conversion]
+    K --> L[OpenType Engineering]
+    L --> M[Testing & Refinement]
+    M --> N[GitHub Open Source Release]
+    N --> O[Google Fonts Submission]
+</pre>
       </ul>
       <p><a href="/" class="btn ghost">See all fonts</a></p>
       <p class="related-fonts">Related: <a href="/Karnata-Bandipur/">Karnata Bandipur</a> · <a href="/Karnata-Wesleyan/">Karnata Wesleyan</a></p>
