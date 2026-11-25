@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Bindu Kannada — an interactive Kannada glyph editor.">
+<link rel="canonical" href="https://type.arunck.com/bindu/">
+<meta property="og:title" content="Bindu Kannada">
+<meta property="og:description" content="Create and export Kannada glyphs in Bindu.">
+<meta property="og:url" content="https://type.arunck.com/bindu/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico">
+<title>Bindu Kannada</title>
+<style>
+:root { --brand: #AF1C2E; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #ececec; }
+body {
+  min-height: 100vh;
+  display: flex;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+#app { width: 1920px; max-width: 100%; margin: auto; padding: 28px; display: grid; grid-template-columns: minmax(0, 1fr) 620px; gap: 28px; align-items: stretch; }
+#stage { min-width: 0; height: 924px; background: #fff; box-shadow: 0 0 0 1px #c8c8c8; }
+canvas#canvas { display: block; width: 100%; height: 924px; touch-action: none; cursor: crosshair; }
+#panel { min-width: 0; height: 924px; display: flex; flex-direction: column; gap: 14px; }
+.brand { height: 64px; display: flex; align-items: center; gap: 12px; }
+.brand-dot { width: 64px; height: 64px; flex: 0 0 64px; border-radius: 50%; background: var(--brand); }
+h1 { font-size: 44px; font-weight: 700; line-height: 1; color: var(--brand); }
+
+#glyphbar { display: grid; grid-template-columns: 1fr 150px 96px 96px; gap: 10px; align-items: end; }
+.fld { display: flex; flex-direction: column; gap: 4px; font-size: 15px; color: #555; }
+input[type="text"], input[type="number"] {
+  height: 52px; width: 100%; font: inherit; font-size: 22px; color: #000;
+  background: #fff; border: 2px solid var(--brand); border-radius: 8px; padding: 0 12px;
+  -webkit-user-select: text; user-select: text;
+}
+input:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+#tiles { flex: 1; min-height: 0; overflow: auto; display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; padding: 2px; }
+.tile {
+  width: 88px; padding: 6px 4px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  font: inherit; font-size: 13px; color: #444; background: #fff;
+  border: 2px solid #c8c8c8; border-radius: 8px; cursor: pointer;
+}
+.tile canvas { width: 64px; height: 120px; display: block; }
+.tile span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile:hover { border-color: var(--brand); }
+.tile[aria-pressed="true"] { border-color: var(--brand); color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); }
+
+#bar { display: flex; flex-direction: column; gap: 10px; }
+.row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.btn {
+  height: 64px; font: inherit; font-size: 22px; color: var(--brand); background: #fff;
+  border: 2px solid var(--brand); border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px; touch-action: manipulation;
+}
+.btn.sm { height: 52px; font-size: 20px; }
+.btn small { font-size: 15px; opacity: 0.65; }
+.btn:hover:not(:disabled), .btn[aria-pressed="true"], .btn.primary { background: var(--brand); color: #fff; }
+.btn.primary:hover:not(:disabled) { background: #fff; color: var(--brand); }
+.btn:disabled { opacity: 0.3; cursor: default; }
+.btn:focus-visible, .tile:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+
+#status { display: flex; justify-content: space-between; gap: 16px; font-size: 18px; color: #555; min-height: 24px; }
+#info { white-space: pre; }
+</style>
+<script>
+if (window.location.pathname === '/bindu/index.html') {
+  window.history.replaceState(null, '', '/bindu/' + window.location.search + window.location.hash)
+}
+</script>
+</head>
+<body>
+<main id="app">
+  <section id="stage"><canvas id="canvas" width="2100" height="1848"></canvas></section>
+  <aside id="panel">
+    <div class="brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <h1>Bindu Kannada</h1>
+    </div>
+    <div id="glyphbar">
+      <label class="fld">Glyph name or character<input id="gname" type="text" spellcheck="false" autocomplete="off"></label>
+      <label class="fld">Advance width<input id="gadv" type="number" min="100" max="2000" step="10"></label>
+      <button class="btn sm" data-act="new" title="Add a glyph">New</button>
+      <button class="btn sm" data-act="delete" title="Delete this glyph">Delete</button>
+    </div>
+    <div id="tiles"></div>
+    <nav id="bar">
+      <div class="row">
+        <button class="btn" data-act="line" title="Line (A)">Line <small>A</small></button>
+        <button class="btn" data-act="arc_c" title="Arc, clockwise (S)">Arc <small>S</small></button>
+        <button class="btn" data-act="arc_r" title="Arc, counter-clockwise (D)">Arc Rev <small>D</small></button>
+        <button class="btn" data-act="bezier" title="Curve, needs 3, 5, 7… points (F)">Curve <small>F</small></button>
+        <button class="btn" data-act="close" title="Close the shape (Z)">Close <small>Z</small></button>
+      </div>
+      <div class="row">
+        <button class="btn" data-act="weightdn" title="Lighter pen ([)">Weight − <small>[</small></button>
+        <button class="btn" data-act="weightup" title="Heavier pen (])">Weight + <small>]</small></button>
+        <button class="btn" data-act="snap" title="Cycle the snap step (G)"><span id="snaplabel">Snap 25</span> <small>G</small></button>
+        <button class="btn" data-act="undo" title="Undo (Ctrl/Cmd+Z)">Undo <small>^Z</small></button>
+        <button class="btn" data-act="clear" title="Clear this glyph (Undo brings it back)">Clear</button>
+      </div>
+      <div class="row">
+        <button class="btn" data-act="guides" title="Show or hide grid and rulers (H)" aria-pressed="true">Guides <small>H</small></button>
+        <button class="btn" data-act="open" title="Open a project file">Open</button>
+        <button class="btn" data-act="save" title="Save a project file (Ctrl/Cmd+S)">Save</button>
+        <button class="btn primary" data-act="export" title="Download this glyph as SVG (Ctrl/Cmd+E)">Export SVG</button>
+        <button class="btn" data-act="exportall" title="Download every glyph as SVG files in one ZIP">Export all</button>
+      </div>
+    </nav>
+    <p id="status"><span id="hint"></span><span id="info"></span></p>
+    <input type="file" id="file" accept=".bindu,.json" hidden>
+  </aside>
+</main>
+<script>
+'use strict'
+;(function () {
+  // <geometry>
+  // Coordinates are font units: x to the right, y UP, baseline at y = 0.
+  const TOP = 1000
+  const BOTTOM = -1000
+  const VIEW = { x0: -300, x1: 2200, y0: -1100, y1: 1100 }
+  const BOUNDS = { x0: -250, x1: 2150, y0: -1100, y1: 1100 }
+  const RULERS = [
+    { y: 1000, label: '1000' },
+    { y: 700, label: '700' },
+    { y: 500, label: '500 x-height' },
+    { y: 0, label: '0 baseline' },
+    { y: -1000, label: '-1000 ottakshara' }
+  ]
+  const SNAPS = [10, 25, 50, 100]
+  const MIN_W = 10
+  const MAX_W = 400
+  const W_STEP = 10
+  const ADV_MIN = 100
+  const ADV_MAX = 2000
+  const TOOLS = {
+    line: { key: 'a', need: 2 },
+    arc_c: { key: 's', need: 2 },
+    arc_r: { key: 'd', need: 2 },
+    bezier: { key: 'f', need: 3 },
+    close: { key: 'z', need: 0 }
+  }
+
+  const fmt = (n) => +n.toFixed(2)
+  const same = (a, b) => a.x === b.x && a.y === b.y
+  const clamp = (v, lo, hi) => (v < lo ? lo : v > hi ? hi : v)
+
+  // Group the segment list into continuous sub-paths.
+  function buildSubpaths (segments) {
+    const subs = []
+    let cur = null
+    let end = null
+    for (const seg of segments) {
+      if (seg.type === 'close') {
+        if (cur) cur.closed = true
+        cur = null
+        end = null
+        continue
+      }
+      const v = seg.v
+      if (!v || v.length < 2) continue
+      if (!cur || !same(end, v[0])) {
+        cur = { closed: false, start: v[0], ops: [{ k: 'M', x: v[0].x, y: v[0].y }] }
+        subs.push(cur)
+      }
+      if (seg.type === 'line') {
+        for (let i = 1; i < v.length; i++) cur.ops.push({ k: 'L', x: v[i].x, y: v[i].y })
+      } else if (seg.type === 'arc_c' || seg.type === 'arc_r') {
+        // y points up here, so "clockwise on screen" is the decreasing-angle direction (s = 0).
+        const s = seg.type === 'arc_c' ? 0 : 1
+        for (let i = 1; i < v.length; i++) {
+          const a = v[i - 1]
+          const b = v[i]
+          if (a.x === b.x || a.y === b.y) cur.ops.push({ k: 'L', x: b.x, y: b.y })
+          else cur.ops.push({ k: 'A', rx: Math.abs(b.x - a.x), ry: Math.abs(b.y - a.y), s, x: b.x, y: b.y })
+        }
+      } else if (seg.type === 'bezier') {
+        for (let i = 0; i + 2 < v.length; i += 2) {
+          cur.ops.push({ k: 'Q', cx: v[i + 1].x, cy: v[i + 1].y, x: v[i + 2].x, y: v[i + 2].y })
+        }
+      }
+      const last = cur.ops[cur.ops.length - 1]
+      end = { x: last.x, y: last.y }
+    }
+    return subs
+  }
+
+  // Quarter-ellipse between two points, same convention as an SVG elliptical arc (large-arc 0).
+  function arcPoints (a, o) {
+    const b = { x: o.x, y: o.y }
+    const rx = o.rx
+    const ry = o.ry
+    for (const c of [{ x: a.x, y: b.y }, { x: b.x, y: a.y }]) {
+      const t0 = Math.atan2((a.y - c.y) / ry, (a.x - c.x) / rx)
+      const t1 = Math.atan2((b.y - c.y) / ry, (b.x - c.x) / rx)
+      let d = t1 - t0
+      while (d > Math.PI) d -= 2 * Math.PI
+      while (d <= -Math.PI) d += 2 * Math.PI
+      if ((d > 0) !== (o.s === 1)) continue
+      const R = Math.max(rx, ry)
+      const da = 2 * Math.acos(Math.max(0, 1 - 0.05 / R))
+      const n = Math.min(240, Math.max(8, Math.ceil(Math.abs(d) / da)))
+      const out = []
+      for (let i = 1; i < n; i++) {
+        const t = t0 + (d * i) / n
+        out.push({ x: c.x + rx * Math.cos(t), y: c.y + ry * Math.sin(t) })
+      }
+      out.push(b)
+      return out
+    }
+    return [b]
+  }
+
+  function quadPoints (p, o) {
+    const len = Math.hypot(o.cx - p.x, o.cy - p.y) + Math.hypot(o.x - o.cx, o.y - o.cy)
+    const n = Math.min(240, Math.max(8, Math.ceil(len / 6)))
+    const out = []
+    for (let i = 1; i <= n; i++) {
+      const t = i / n
+      const u = 1 - t
+      out.push({
+        x: u * u * p.x + 2 * u * t * o.cx + t * t * o.x,
+        y: u * u * p.y + 2 * u * t * o.cy + t * t * o.y
+      })
+    }
+    return out
+  }
+
+  function flatten (sub) {
+    const pts = []
+    let p = null
+    const push = (x, y) => {
+      const last = pts[pts.length - 1]
+      if (!last || last.x !== x || last.y !== y) pts.push({ x, y })
+    }
+    for (const o of sub.ops) {
+      if (o.k === 'M' || o.k === 'L') push(o.x, o.y)
+      else if (o.k === 'A') arcPoints(p, o).forEach((q) => push(q.x, q.y))
+      else if (o.k === 'Q') quadPoints(p, o).forEach((q) => push(q.x, q.y))
+      p = { x: o.x, y: o.y }
+    }
+    if (sub.closed && pts.length > 1) push(sub.start.x, sub.start.y)
+    return pts
+  }
+
+  // All shapes below wind the same way, so under the default nonzero fill rule they merge into one form.
+  function circle (p, r) {
+    return `M${fmt(p.x - r)} ${fmt(p.y)}a${fmt(r)} ${fmt(r)} 0 1 1 ${fmt(2 * r)} 0a${fmt(r)} ${fmt(r)} 0 1 1 ${fmt(-2 * r)} 0Z`
+  }
+
+  function quad (p, q, r) {
+    const dx = q.x - p.x
+    const dy = q.y - p.y
+    const len = Math.hypot(dx, dy)
+    if (!len) return ''
+    const nx = (-dy / len) * r
+    const ny = (dx / len) * r
+    return `M${fmt(p.x + nx)} ${fmt(p.y + ny)}L${fmt(p.x - nx)} ${fmt(p.y - ny)}L${fmt(q.x - nx)} ${fmt(q.y - ny)}L${fmt(q.x + nx)} ${fmt(q.y + ny)}Z`
+  }
+
+  // The drawing as pure fill geometry: a pen of diameter t swept along every stroke.
+  function outline (segments, t, map) {
+    const r = t / 2
+    let d = ''
+    for (const sub of buildSubpaths(segments)) {
+      let pts = flatten(sub)
+      if (map) pts = pts.map(map)
+      for (let i = 0; i < pts.length; i++) {
+        d += circle(pts[i], r)
+        if (i > 0) d += quad(pts[i - 1], pts[i], r)
+      }
+    }
+    return d
+  }
+
+  // SVG is y-down: the baseline lands at y = 1000, the 1000 ruler at y = 0, the -1000 ruler at y = 2000.
+  function glyphSVG (g, weight) {
+    const d = outline(g.segments, weight, (p) => ({ x: p.x, y: TOP - p.y }))
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${g.adv}" height="${TOP - BOTTOM}" viewBox="0 0 ${g.adv} ${TOP - BOTTOM}">\n<path fill="#000" d="${d}"/>\n</svg>\n`
+  }
+
+  // Minimal ZIP writer (stored, no compression) so "Export all" needs no library.
+  const CRC_TABLE = (() => {
+    const t = new Uint32Array(256)
+    for (let n = 0; n < 256; n++) {
+      let c = n
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1
+      t[n] = c >>> 0
+    }
+    return t
+  })()
+
+  function crc32 (bytes) {
+    let c = 0xffffffff
+    for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 255] ^ (c >>> 8)
+    return (c ^ 0xffffffff) >>> 0
+  }
+
+  function zipParts (files) {
+    const enc = new TextEncoder()
+    const parts = []
+    const central = []
+    let offset = 0
+    for (const f of files) {
+      const name = enc.encode(f.name)
+      const crc = crc32(f.data)
+      const len = f.data.length
+      const lh = new DataView(new ArrayBuffer(30))
+      lh.setUint32(0, 0x04034b50, true)
+      lh.setUint16(4, 20, true)
+      lh.setUint16(6, 0x0800, true)
+      lh.setUint16(12, 0x21, true)
+      lh.setUint32(14, crc, true)
+      lh.setUint32(18, len, true)
+      lh.setUint32(22, len, true)
+      lh.setUint16(26, name.length, true)
+      parts.push(new Uint8Array(lh.buffer), name, f.data)
+      const ch = new DataView(new ArrayBuffer(46))
+      ch.setUint32(0, 0x02014b50, true)
+      ch.setUint16(4, 20, true)
+      ch.setUint16(6, 20, true)
+      ch.setUint16(8, 0x0800, true)
+      ch.setUint16(14, 0x21, true)
+      ch.setUint32(16, crc, true)
+      ch.setUint32(20, len, true)
+      ch.setUint32(24, len, true)
+      ch.setUint16(28, name.length, true)
+      ch.setUint32(42, offset, true)
+      central.push(new Uint8Array(ch.buffer), name)
+      offset += 30 + name.length + len
+    }
+    const cdSize = central.reduce((n, p) => n + p.length, 0)
+    const end = new DataView(new ArrayBuffer(22))
+    end.setUint32(0, 0x06054b50, true)
+    end.setUint16(8, files.length, true)
+    end.setUint16(10, files.length, true)
+    end.setUint32(12, cdSize, true)
+    end.setUint32(16, offset, true)
+    return parts.concat(central, [new Uint8Array(end.buffer)])
+  }
+  // </geometry>
+
+  if (typeof document === 'undefined') return
+
+  const BRAND = '#AF1C2E' // keep in step with --brand in the stylesheet
+  const INK = '#000'
+  const S = 0.42 // screen pixels per font unit
+  const W = (VIEW.x1 - VIEW.x0) * S
+  const H = (VIEW.y1 - VIEW.y0) * S
+
+  const $ = (id) => document.getElementById(id)
+  const canvas = $('canvas')
+  const ctx = canvas.getContext('2d')
+  const panel = $('panel')
+  const bar = $('bar')
+  const tilesEl = $('tiles')
+  const hintEl = $('hint')
+  const infoEl = $('info')
+  const nameEl = $('gname')
+  const advEl = $('gadv')
+  const fileInput = $('file')
+  const snapLabel = $('snaplabel')
+  const buttons = Array.from(document.querySelectorAll('[data-act]'))
+
+  const copy = (v) => JSON.parse(JSON.stringify(v))
+  const font = { weight: 80, snap: 25, cur: 0, glyphs: [] }
+  const state = { pending: [], grid: true, hover: null, cursor: null, drag: null, down: false }
+
+  function makeGlyph (name, adv = 1000, segments = []) {
+    return { name, adv, segments, ver: 0, hist: { stack: [copy(segments)], i: 0 }, cache: null }
+  }
+  font.glyphs.push(makeGlyph('glyph1'))
+  const G = () => font.glyphs[font.cur]
+
+  const X = (x) => (x - VIEW.x0) * S
+  const Y = (y) => (VIEW.y1 - y) * S
+  const px = (p) => ({ x: X(p.x), y: Y(p.y) })
+
+  // ---- glyph names ----
+  function unique (name, others) {
+    let cand = name
+    let n = 2
+    while (others.some((o) => o.name === cand)) cand = name + '_' + n++
+    return cand
+  }
+  function nextGlyphName () {
+    let n = 1
+    while (font.glyphs.some((g) => g.name === 'glyph' + n)) n++
+    return 'glyph' + n
+  }
+  const safeName = (n) => n.replace(/[^A-Za-z0-9._-]+/g, '_') || 'glyph'
+
+  // ---- state changes ----
+  function changed () { refresh(false); draw() }
+  function geometry () { G().ver++; refresh(true); draw() }
+
+  function commit () {
+    const g = G()
+    const h = g.hist
+    h.stack = h.stack.slice(0, h.i + 1)
+    h.stack.push(copy(g.segments))
+    if (h.stack.length > 60) h.stack.shift()
+    h.i = h.stack.length - 1
+    geometry()
+  }
+
+  function undo () {
+    if (state.pending.length) { state.pending.pop(); changed(); return }
+    const g = G()
+    if (g.hist.i === 0) return
+    g.hist.i--
+    g.segments = copy(g.hist.stack[g.hist.i])
+    geometry()
+  }
+
+  function redo () {
+    const g = G()
+    if (g.hist.i >= g.hist.stack.length - 1) return
+    g.hist.i++
+    g.segments = copy(g.hist.stack[g.hist.i])
+    geometry()
+  }
+
+  function canCast (type) {
+    const n = state.pending.length
+    const segs = G().segments
+    if (type === 'close') return n === 0 && segs.length > 0 && segs[segs.length - 1].type !== 'close'
+    if (type === 'bezier') return n >= 3 && n % 2 === 1
+    return n >= 2
+  }
+
+  function cast (type) {
+    if (!canCast(type)) return
+    G().segments.push({ type, v: type === 'close' ? [] : state.pending.map((p) => ({ x: p.x, y: p.y })) })
+    state.pending = []
+    commit()
+  }
+
+  // Nearest committed or pending point within 12 screen pixels of a raw (unsnapped) position.
+  function nearest (list, raw) {
+    const limit = 12 / S
+    let best = null
+    let bd = limit
+    for (const p of list) {
+      const d = Math.hypot(p.x - raw.x, p.y - raw.y)
+      if (d <= bd) { best = p; bd = d }
+    }
+    return best
+  }
+  const allVertices = () => [].concat(...G().segments.map((s) => s.v))
+
+  function moveVertex (a, b) {
+    for (const s of G().segments) {
+      for (let i = 0; i < s.v.length; i++) if (same(s.v[i], a)) s.v[i] = { x: b.x, y: b.y }
+    }
+  }
+
+  function moveSegment (a, b) {
+    const s = G().segments.find((seg) => seg.v.some((p) => same(p, a)))
+    if (!s) return
+    const xs = s.v.map((p) => p.x)
+    const ys = s.v.map((p) => p.y)
+    const dx = clamp(b.x - a.x, BOUNDS.x0 - Math.min(...xs), BOUNDS.x1 - Math.max(...xs))
+    const dy = clamp(b.y - a.y, BOUNDS.y0 - Math.min(...ys), BOUNDS.y1 - Math.max(...ys))
+    s.v = s.v.map((p) => ({ x: p.x + dx, y: p.y + dy }))
+  }
+
+  function removeAt (pos) {
+    const g = G()
+    let hit = false
+    let out = []
+    for (const s of g.segments) {
+      if (s.type === 'close' || !s.v.some((p) => same(p, pos))) { out.push(s); continue }
+      hit = true
+      if (s.type === 'bezier') continue
+      const v = s.v.filter((p) => !same(p, pos))
+      if (v.length >= 2) out.push({ type: s.type, v })
+    }
+    if (!hit) return false
+    out = out.filter((s, i) => s.type !== 'close' || (i > 0 && out[i - 1].type !== 'close'))
+    g.segments = out
+    return true
+  }
+
+  function removeLast () {
+    if (state.pending.length) { state.pending.pop(); changed(); return }
+    const g = G()
+    if (!g.segments.length) return
+    g.segments.pop()
+    commit()
+  }
+
+  function clearGlyph () {
+    state.pending = []
+    const g = G()
+    if (g.segments.length) { g.segments = []; commit() } else changed()
+  }
+
+  function setWeight (w) {
+    font.weight = clamp(w, MIN_W, MAX_W)
+    refresh(true)
+    draw()
+  }
+
+  function cycleSnap () {
+    font.snap = SNAPS[(SNAPS.indexOf(font.snap) + 1) % SNAPS.length]
+    changed()
+  }
+
+  function toggleGuides () {
+    state.grid = !state.grid
+    changed()
+  }
+
+  // ---- glyph set ----
+  function releaseFields () {
+    const a = document.activeElement
+    if (a && a.tagName === 'INPUT') a.blur() // applies a pending rename to the glyph it belongs to
+  }
+
+  function selectGlyph (i) {
+    releaseFields()
+    if (i === font.cur || !font.glyphs[i]) return
+    font.cur = i
+    state.pending = []
+    state.drag = null
+    refresh(true)
+    draw()
+  }
+
+  function newGlyph () {
+    font.glyphs.push(makeGlyph(nextGlyphName()))
+    font.cur = font.glyphs.length - 1
+    state.pending = []
+    refresh(true)
+    draw()
+    nameEl.focus()
+    nameEl.select()
+  }
+
+  function deleteGlyph () {
+    releaseFields()
+    const g = G()
+    if (g.segments.length && !window.confirm(`Delete glyph "${g.name}"?`)) return
+    font.glyphs.splice(font.cur, 1)
+    if (!font.glyphs.length) font.glyphs.push(makeGlyph('glyph1'))
+    font.cur = clamp(font.cur, 0, font.glyphs.length - 1)
+    state.pending = []
+    refresh(true)
+    draw()
+  }
+
+  nameEl.addEventListener('change', () => {
+    let v = nameEl.value.trim()
+    const chars = Array.from(v)
+    if (chars.length === 1 && !/[A-Za-z0-9]/.test(v)) {
+      const h = v.codePointAt(0).toString(16).toUpperCase()
+      v = h.length <= 4 ? 'uni' + h.padStart(4, '0') : 'u' + h
+    }
+    if (!v) v = G().name
+    G().name = unique(v, font.glyphs.filter((x) => x !== G()))
+    nameEl.value = G().name
+    refresh(true)
+  })
+
+  advEl.addEventListener('change', () => {
+    const v = Math.round(Number(advEl.value))
+    if (Number.isFinite(v)) G().adv = clamp(v, ADV_MIN, ADV_MAX)
+    advEl.value = G().adv
+    refresh(true)
+    draw()
+  })
+
+  // ---- files ----
+  function download (name, content, type) {
+    const blob = content instanceof Blob ? content : new Blob([content], { type })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = name
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
+  }
+
+  function exportSVG () {
+    const g = G()
+    if (!g.segments.length) return
+    download(safeName(g.name) + '.svg', glyphSVG(g, font.weight), 'image/svg+xml')
+  }
+
+  function exportAll () {
+    const enc = new TextEncoder()
+    const used = new Set()
+    const files = []
+    for (const g of font.glyphs) {
+      if (!g.segments.length) continue
+      let base = safeName(g.name)
+      let name = base
+      let n = 2
+      while (used.has(name.toLowerCase())) name = base + '_' + n++
+      used.add(name.toLowerCase())
+      files.push({ name: name + '.svg', data: enc.encode(glyphSVG(g, font.weight)) })
+    }
+    if (!files.length) return
+    download('bindu-kannada.zip', new Blob(zipParts(files), { type: 'application/zip' }))
+  }
+
+  function save () {
+    const data = {
+      project: 'bindu-kannada',
+      version: 2,
+      weight: font.weight,
+      snap: font.snap,
+      current: font.cur,
+      glyphs: font.glyphs.map((g) => ({ name: g.name, adv: g.adv, segments: g.segments }))
+    }
+    download('bindu-kannada.bindu', JSON.stringify(data), 'application/json')
+  }
+
+  function cleanSegments (list) {
+    const segs = []
+    if (!Array.isArray(list)) return segs
+    for (const s of list) {
+      if (!s || !TOOLS[s.type]) continue
+      if (s.type === 'close') { segs.push({ type: 'close', v: [] }); continue }
+      if (!Array.isArray(s.v)) continue
+      const v = s.v
+        .filter((p) => p && Number.isFinite(p.x) && Number.isFinite(p.y))
+        .map((p) => ({ x: clamp(p.x, -1000, 3000), y: clamp(p.y, -1500, 1500) }))
+      if (s.type === 'bezier' && v.length % 2 === 0) v.pop()
+      if (v.length >= TOOLS[s.type].need) segs.push({ type: s.type, v })
+    }
+    return segs
+  }
+
+  function load (text) {
+    let data
+    try { data = JSON.parse(text) } catch (e) { data = null }
+    if (!data || data.project !== 'bindu-kannada' || !Array.isArray(data.glyphs)) {
+      window.alert('This is not a Bindu Kannada font project file.')
+      return
+    }
+    const glyphs = []
+    for (const gl of data.glyphs) {
+      if (!gl || typeof gl.name !== 'string' || !gl.name) continue
+      const adv = Number.isFinite(Number(gl.adv)) ? clamp(Math.round(Number(gl.adv)), ADV_MIN, ADV_MAX) : 1000
+      glyphs.push(makeGlyph(unique(gl.name, glyphs), adv, cleanSegments(gl.segments)))
+    }
+    if (!glyphs.length) {
+      window.alert('This project file has no glyphs.')
+      return
+    }
+    font.glyphs = glyphs
+    font.cur = clamp(Math.round(Number(data.current)) || 0, 0, glyphs.length - 1)
+    const w = Number(data.weight)
+    font.weight = Number.isFinite(w) ? clamp(Math.round(w / W_STEP) * W_STEP, MIN_W, MAX_W) : 80
+    font.snap = SNAPS.includes(data.snap) ? data.snap : 25
+    state.pending = []
+    geometry()
+  }
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0]
+    fileInput.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => load(String(reader.result))
+    reader.readAsText(file, 'UTF-8')
+  })
+
+  // ---- drawing ----
+  function inkOf (g) {
+    const key = g.ver + '|' + font.weight
+    if (!g.cache || g.cache.key !== key) g.cache = { key, path: new Path2D(outline(g.segments, font.weight)) }
+    return g.cache.path
+  }
+
+  let gridCache = null
+  function gridPaths () {
+    const step = Math.max(font.snap, 25)
+    if (gridCache && gridCache.step === step) return gridCache
+    const minor = new Path2D()
+    const major = new Path2D()
+    for (let x = Math.ceil(VIEW.x0 / step) * step; x <= VIEW.x1; x += step) {
+      for (let y = Math.ceil(VIEW.y0 / step) * step; y <= VIEW.y1; y += step) {
+        const big = x % 100 === 0 && y % 100 === 0
+        const r = big ? 2 : 1.2
+        const path = big ? major : minor
+        path.moveTo(X(x) + r, Y(y))
+        path.arc(X(x), Y(y), r, 0, Math.PI * 2)
+      }
+    }
+    gridCache = { step, minor, major }
+    return gridCache
+  }
+
+  function dot (p, r, color) {
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, r, 0, Math.PI * 2)
+    ctx.fillStyle = color
+    ctx.fill()
+  }
+
+  function drawGuides (g) {
+    ctx.fillStyle = '#f1f1f1'
+    ctx.fillRect(0, 0, X(0), H)
+    ctx.fillRect(X(g.adv), 0, W - X(g.adv), H)
+    const grid = gridPaths()
+    ctx.fillStyle = '#d4d4d4'
+    ctx.fill(grid.minor)
+    ctx.fillStyle = '#a8a8a8'
+    ctx.fill(grid.major)
+    ctx.save()
+    ctx.strokeStyle = BRAND
+    ctx.globalAlpha = 0.5
+    ctx.lineWidth = 1.5
+    ctx.beginPath()
+    for (const x of [0, g.adv]) { ctx.moveTo(X(x), 0); ctx.lineTo(X(x), H) }
+    ctx.stroke()
+    ctx.restore()
+    ctx.font = '600 13px system-ui, sans-serif'
+    ctx.textBaseline = 'alphabetic'
+    for (const r of RULERS) {
+      const base = r.y === 0
+      ctx.save()
+      ctx.strokeStyle = BRAND
+      ctx.globalAlpha = base ? 1 : 0.7
+      ctx.lineWidth = base ? 2.5 : 1.5
+      ctx.beginPath()
+      ctx.moveTo(0, Y(r.y))
+      ctx.lineTo(W, Y(r.y))
+      ctx.stroke()
+      ctx.restore()
+      ctx.fillStyle = BRAND
+      ctx.fillText(r.label, 6, Y(r.y) - 5)
+    }
+    ctx.fillStyle = BRAND
+    ctx.fillText(String(g.adv), X(g.adv) + 6, 16)
+  }
+
+  function drawHandles (g) {
+    const seen = new Set()
+    for (const s of g.segments) {
+      for (const p of s.v) {
+        const key = p.x + ',' + p.y
+        if (seen.has(key)) continue
+        seen.add(key)
+        const q = px(p)
+        dot(q, 8, '#fff')
+        dot(q, 6, BRAND)
+        dot(q, 2.5, '#fff')
+      }
+    }
+  }
+
+  function drawPending () {
+    const pts = state.pending.map(px)
+    if (!pts.length) return
+    if (pts.length > 1) {
+      ctx.save()
+      ctx.setLineDash([4, 8])
+      ctx.lineWidth = 2
+      ctx.strokeStyle = '#777'
+      ctx.beginPath()
+      pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)))
+      ctx.stroke()
+      ctx.restore()
+    }
+    for (const p of pts) {
+      dot(p, 8.5, '#fff')
+      dot(p, 6.5, '#333')
+    }
+  }
+
+  function drawPreview () {
+    const t = state.hover
+    if (!t || t === 'close' || !canCast(t)) return
+    ctx.save()
+    ctx.setLineDash([6, 8])
+    ctx.lineWidth = 2
+    ctx.lineCap = 'round'
+    ctx.strokeStyle = BRAND
+    for (const sub of buildSubpaths([{ type: t, v: state.pending }])) {
+      ctx.beginPath()
+      flatten(sub).map(px).forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)))
+      ctx.stroke()
+    }
+    ctx.restore()
+  }
+
+  function drawDrag () {
+    const d = state.drag
+    if (!d) return
+    const a = px(d.from)
+    const b = px(d.to)
+    ctx.save()
+    ctx.lineWidth = 1.5
+    ctx.strokeStyle = '#b8b8b8'
+    ctx.beginPath()
+    ctx.moveTo(b.x, 0)
+    ctx.lineTo(b.x, H)
+    ctx.moveTo(0, b.y)
+    ctx.lineTo(W, b.y)
+    ctx.stroke()
+    ctx.setLineDash([5, 8])
+    ctx.lineWidth = 3
+    ctx.lineCap = 'round'
+    ctx.strokeStyle = BRAND
+    ctx.beginPath()
+    ctx.moveTo(a.x, a.y)
+    ctx.lineTo(b.x, b.y)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  function drawCursor () {
+    const c = state.cursor
+    if (!c) return
+    const p = px(c)
+    const r = Math.max(5, (font.weight / 2) * S)
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, r, 0, Math.PI * 2)
+    ctx.lineWidth = 4
+    ctx.strokeStyle = '#fff'
+    ctx.stroke()
+    ctx.lineWidth = 1.5
+    ctx.strokeStyle = BRAND
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  function draw () {
+    const g = G()
+    ctx.setTransform(2, 0, 0, 2, 0, 0)
+    ctx.clearRect(0, 0, W, H)
+    if (state.grid) drawGuides(g)
+    ctx.setTransform(2 * S, 0, 0, -2 * S, -2 * S * VIEW.x0, 2 * S * VIEW.y1)
+    ctx.fillStyle = INK
+    ctx.fill(inkOf(g))
+    ctx.setTransform(2, 0, 0, 2, 0, 0)
+    if (state.grid) { drawPreview(); drawHandles(g) }
+    drawDrag()
+    drawPending()
+    if (state.grid) drawCursor()
+  }
+
+  function drawThumb (c, g) {
+    const t = c.getContext('2d')
+    const k = 2 * Math.min(0.06, 60 / g.adv)
+    t.setTransform(1, 0, 0, 1, 0, 0)
+    t.clearRect(0, 0, c.width, c.height)
+    t.fillStyle = '#e2e2e2'
+    t.fillRect(0, 1000 * k - 1, c.width, 2)
+    t.setTransform(k, 0, 0, -k, (c.width - g.adv * k) / 2, 1000 * k)
+    t.fillStyle = INK
+    t.fill(inkOf(g))
+  }
+
+  function renderTiles () {
+    tilesEl.textContent = ''
+    font.glyphs.forEach((g, i) => {
+      const b = document.createElement('button')
+      b.className = 'tile'
+      b.dataset.i = String(i)
+      b.setAttribute('aria-pressed', String(i === font.cur))
+      const m = /^u(?:ni)?([0-9A-Fa-f]{4,6})$/.exec(g.name)
+      b.title = m ? `${g.name}  ${String.fromCodePoint(parseInt(m[1], 16))}` : g.name
+      const c = document.createElement('canvas')
+      c.width = 128
+      c.height = 240
+      drawThumb(c, g)
+      const s = document.createElement('span')
+      s.textContent = g.name
+      b.append(c, s)
+      tilesEl.appendChild(b)
+    })
+  }
+
+  function refresh (full) {
+    const g = G()
+    const has = g.segments.length > 0
+    const anyInk = font.glyphs.some((x) => x.segments.length > 0)
+    for (const b of buttons) {
+      const a = b.dataset.act
+      if (TOOLS[a]) b.disabled = !canCast(a)
+      else if (a === 'undo') b.disabled = !(state.pending.length || g.hist.i > 0)
+      else if (a === 'clear') b.disabled = !(has || state.pending.length)
+      else if (a === 'export') b.disabled = !has
+      else if (a === 'exportall') b.disabled = !anyInk
+      else if (a === 'save') b.disabled = !anyInk
+      else if (a === 'weightdn') b.disabled = font.weight <= MIN_W
+      else if (a === 'weightup') b.disabled = font.weight >= MAX_W
+      else if (a === 'guides') b.setAttribute('aria-pressed', String(state.grid))
+    }
+    snapLabel.textContent = `Snap ${font.snap}`
+    const n = state.pending.length
+    hintEl.textContent = n
+      ? `${n} point${n === 1 ? '' : 's'} placed. Pick Line, Arc or Curve.`
+      : has ? 'Shift-drag moves a stroke. Right-click deletes a point.' : 'Click the grid to place points.'
+    if (document.activeElement !== nameEl) nameEl.value = g.name
+    if (document.activeElement !== advEl) advEl.value = g.adv
+    updateInfo()
+    if (full) renderTiles()
+  }
+
+  function updateInfo () {
+    const c = state.cursor
+    infoEl.textContent = `Weight ${font.weight}   ` + (c ? `x ${c.x}   y ${c.y}` : '')
+  }
+
+  // ---- input ----
+  function locate (e) {
+    const r = canvas.getBoundingClientRect()
+    const raw = {
+      x: VIEW.x0 + ((e.clientX - r.left) / r.width) * (VIEW.x1 - VIEW.x0),
+      y: VIEW.y1 - ((e.clientY - r.top) / r.height) * (VIEW.y1 - VIEW.y0)
+    }
+    const s = font.snap
+    const pos = {
+      x: clamp(Math.round(raw.x / s) * s, Math.ceil(BOUNDS.x0 / s) * s, Math.floor(BOUNDS.x1 / s) * s),
+      y: clamp(Math.round(raw.y / s) * s, Math.ceil(BOUNDS.y0 / s) * s, Math.floor(BOUNDS.y1 / s) * s)
+    }
+    return { raw, pos }
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return
+    canvas.setPointerCapture(e.pointerId)
+    const { raw, pos } = locate(e)
+    state.cursor = pos
+    state.down = true
+    const v = nearest(allVertices(), raw)
+    state.drag = v ? { from: { x: v.x, y: v.y }, to: pos, multi: e.shiftKey } : null
+    draw()
+    updateInfo()
+  })
+
+  canvas.addEventListener('pointermove', (e) => {
+    const { pos } = locate(e)
+    const moved = !state.cursor || !same(state.cursor, pos)
+    state.cursor = pos
+    if (state.drag) state.drag.to = pos
+    if (moved) { draw(); updateInfo() }
+  })
+
+  canvas.addEventListener('pointerup', (e) => {
+    if (!state.down) return
+    state.down = false
+    const { pos } = locate(e)
+    const d = state.drag
+    state.drag = null
+    if (e.pointerType !== 'mouse') state.cursor = null
+    if (d && !same(d.from, pos)) {
+      if (d.multi) moveSegment(d.from, pos)
+      else moveVertex(d.from, pos)
+      commit()
+    } else {
+      state.pending.push(d ? d.from : pos)
+      changed()
+    }
+  })
+
+  canvas.addEventListener('pointercancel', () => {
+    state.down = false
+    state.drag = null
+    draw()
+  })
+
+  canvas.addEventListener('pointerleave', () => {
+    if (state.down) return
+    state.cursor = null
+    draw()
+    updateInfo()
+  })
+
+  canvas.addEventListener('contextmenu', (e) => {
+    e.preventDefault()
+    const { raw } = locate(e)
+    const pend = nearest(state.pending, raw)
+    if (pend) {
+      state.pending = state.pending.filter((p) => p !== pend)
+      changed()
+      return
+    }
+    const v = nearest(allVertices(), raw)
+    if (v && removeAt({ x: v.x, y: v.y })) commit()
+  })
+
+  function act (a) {
+    if (TOOLS[a]) return cast(a)
+    switch (a) {
+      case 'weightdn': return setWeight(font.weight - W_STEP)
+      case 'weightup': return setWeight(font.weight + W_STEP)
+      case 'snap': return cycleSnap()
+      case 'undo': return undo()
+      case 'clear': return clearGlyph()
+      case 'guides': return toggleGuides()
+      case 'new': return newGlyph()
+      case 'delete': return deleteGlyph()
+      case 'open': return fileInput.click()
+      case 'save': return save()
+      case 'export': return exportSVG()
+      case 'exportall': return exportAll()
+    }
+  }
+
+  panel.addEventListener('click', (e) => {
+    const t = e.target.closest('.tile')
+    if (t) { selectGlyph(Number(t.dataset.i)); return }
+    const b = e.target.closest('[data-act]')
+    if (b && !b.disabled) act(b.dataset.act)
+  })
+
+  bar.addEventListener('mouseover', (e) => {
+    const b = e.target.closest('button')
+    const a = b && b.dataset.act
+    state.hover = a && TOOLS[a] ? a : null
+    draw()
+  })
+
+  bar.addEventListener('mouseleave', () => {
+    state.hover = null
+    draw()
+  })
+
+  window.addEventListener('keydown', (e) => {
+    if (e.target && e.target.tagName === 'INPUT') {
+      if (e.key === 'Escape') e.target.blur()
+      return
+    }
+    const k = e.key.toLowerCase()
+    if (e.ctrlKey || e.metaKey) {
+      if (k === 'z') { if (e.shiftKey) redo(); else undo() }
+      else if (k === 'y') redo()
+      else if (k === 's') save()
+      else if (k === 'e') exportSVG()
+      else if (k === 'o') fileInput.click()
+      else return
+      e.preventDefault()
+      return
+    }
+    if (e.altKey) return
+    const tool = Object.keys(TOOLS).find((t) => TOOLS[t].key === k)
+    if (tool) cast(tool)
+    else if (k === 'escape') { state.pending = []; changed() }
+    else if (k === 'backspace') removeLast()
+    else if (k === 'h') toggleGuides()
+    else if (k === 'g') cycleSnap()
+    else if (k === ']' || k === '}' || k === '+' || k === '=') setWeight(font.weight + W_STEP)
+    else if (k === '[' || k === '{' || k === '-') setWeight(font.weight - W_STEP)
+    else return
+    e.preventDefault()
+  })
+
+  refresh(true)
+  draw()
+})()
+</script>
+</body>
+</html>
